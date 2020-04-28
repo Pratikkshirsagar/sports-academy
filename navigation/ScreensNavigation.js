@@ -1,4 +1,5 @@
-import { createStackNavigator, createSwitchNavigator, createAppContainer } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
 import CatogoriesScreen from '../screens/CatogoriesScreen';
 import CatogorySportScreen from '../screens/CatogorySportScreen';
