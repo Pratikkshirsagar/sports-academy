@@ -6,6 +6,11 @@ const WelcomeScreen = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const onSignIn = () => {
+    props.navigation.navigate('SportsNavigator');
+  };
+  const onSignUp = () => {};
+
   return (
     <View style={styles.container}>
       <Text style={styles.logo}>Sports Academy</Text>
@@ -29,10 +34,7 @@ const WelcomeScreen = (props) => {
       <TouchableOpacity>
         <Text style={styles.forgot}>Forgot Password?</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.loginBtn}
-        onPress={() => props.navigation.navigate('SportsNavigator')}
-      >
+      <TouchableOpacity style={styles.loginBtn} onPress={onSignIn}>
         <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>
       <TouchableOpacity>
