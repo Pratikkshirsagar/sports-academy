@@ -44,19 +44,19 @@ const WelcomeScreen = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#003f5c',
+    backgroundColor: '#4a148c',
     alignItems: 'center',
     justifyContent: 'center',
   },
   logo: {
     fontWeight: 'bold',
     fontSize: 40,
-    color: '#fb5b5a',
+    color: '#ff6f00',
     marginBottom: 40,
   },
   inputView: {
     width: '80%',
-    backgroundColor: '#465881',
+    backgroundColor: 'white',
     borderRadius: 25,
     height: 50,
     marginBottom: 20,
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   },
   loginBtn: {
     width: '80%',
-    backgroundColor: '#fb5b5a',
+    backgroundColor: '#ff6f00',
     borderRadius: 25,
     height: 50,
     alignItems: 'center',
