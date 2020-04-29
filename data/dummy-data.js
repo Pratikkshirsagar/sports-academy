@@ -3,7 +3,7 @@ import Category from '../models/category';
 export const CATEGORIES = [
   new Category('c1', 'Karate', '#f5428d'),
   new Category('c2', 'Tennis Court', '#f54242'),
-  new Category('c3', 'Squash Court', '#f5a442'),
+  new Category('c3', 'Gym', '#f5a442'),
   new Category('c4', 'Badminton', '#f5d142'),
   new Category('c5', 'Football', '#368dff'),
   new Category('c6', 'Cricket', '#41d95d'),
