@@ -1,12 +1,27 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 
+import { CATEGORIES } from '../data/dummy-data';
+
 const CategorySportScreen = (props) => {
+  const catId = props.navigation.getParam('categoryId');
+
+  const selectedCategory = CATEGORIES.find((cat) => cat.id === catId);
+
   return (
     <View style={styles.screen}>
-      <Text>From categorys Sport Screen</Text>
+      <Text>{selectedCategory.title}</Text>
     </View>
   );
+};
+
+CategorySportScreen.navigationOptions = (navigationData) => {
+  const catId = navigationData.navigation.getParam('categoryId');
+  const selectedCategory = CATEGORIES.find((cat) => cat.id === catId);
+
+  return {
+    headerTitle: selectedCategory.title,
+  };
 };
 
 const styles = StyleSheet.create({
