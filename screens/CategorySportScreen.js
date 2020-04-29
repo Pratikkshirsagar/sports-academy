@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 
-const CatogorySportScreen = (props) => {
+const CategorySportScreen = (props) => {
   return (
     <View style={styles.screen}>
       <Text>From categorys Sport Screen</Text>
@@ -17,4 +17,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CatogorySportScreen;
+export default CategorySportScreen;

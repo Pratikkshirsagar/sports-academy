@@ -1,14 +1,14 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-import CatogoriesScreen from '../screens/CatogoriesScreen';
-import CatogorySportScreen from '../screens/CatogorySportScreen';
+import CategoriesScreen from '../screens/CategoriesScreen';
+import CategorySportScreen from '../screens/CategorySportScreen';
 import SportDetailScreen from '../screens/SportDetailScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 
 const SportsNavigator = createStackNavigator({
-  Categories: CatogoriesScreen,
-  CategorySport: CatogorySportScreen,
+  Categories: CategoriesScreen,
+  CategorySport: CategorySportScreen,
   SportDetail: SportDetailScreen,
 });
 
