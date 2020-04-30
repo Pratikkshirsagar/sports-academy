@@ -27,6 +27,7 @@ SportDetailScreen.navigationOptions = (navigationData) => {
 
   return {
     headerTitle: selectedSport.title,
+    headerRight: () => <Text>FAV!</Text>,
   };
 };
 
