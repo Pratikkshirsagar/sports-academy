@@ -5,7 +5,7 @@ import { CATEGORIES } from '../data/dummy-data';
 
 const CategorySportScreen = (props) => {
   const catId = props.navigation.getParam('categoryId');
-
+  console.log(catId);
   const selectedCategory = CATEGORIES.find((cat) => cat.id === catId);
 
   return (

@@ -16,7 +16,7 @@ const CategoryGridTile = (props) => {
     imgIcon = <IconMat name={props.icon} size={50} color="white" />;
   } else if (props.title === 'Karate') {
     imgIcon = <IconMat name={props.icon} size={50} color="white" />;
-  } else if (props.title === 'swimming') {
+  } else if (props.title === 'Swimming') {
     imgIcon = <Icon name={props.icon} size={50} color="white" />;
   } else if (props.title === 'Table Tennis') {
     imgIcon = <Icon name={props.icon} size={50} color="white" />;
@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     color: '#fffff2',
+    marginTop: 15,
   },
 });
 
