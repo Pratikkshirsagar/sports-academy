@@ -7,25 +7,25 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 const CategoryGridTile = (props) => {
   let imgIcon;
   if (props.title === 'Cricket') {
-    imgIcon = <IconMat name={props.icon} size={50} color="white" />;
+    imgIcon = <IconMat name={props.icon} size={60} color="white" />;
   } else if (props.title === 'Football') {
-    imgIcon = <IconFoot name={props.icon} size={50} color="white" />;
+    imgIcon = <IconFoot name={props.icon} size={60} color="white" />;
   } else if (props.title === 'Gym') {
-    imgIcon = <Icon name={props.icon} size={50} color="white" />;
+    imgIcon = <Icon name={props.icon} size={60} color="white" />;
   } else if (props.title === 'Tennis Court') {
-    imgIcon = <IconMat name={props.icon} size={50} color="white" />;
+    imgIcon = <IconMat name={props.icon} size={60} color="white" />;
   } else if (props.title === 'Karate') {
-    imgIcon = <IconMat name={props.icon} size={50} color="white" />;
+    imgIcon = <IconMat name={props.icon} size={60} color="white" />;
   } else if (props.title === 'Swimming') {
-    imgIcon = <Icon name={props.icon} size={50} color="white" />;
+    imgIcon = <Icon name={props.icon} size={60} color="white" />;
   } else if (props.title === 'Table Tennis') {
-    imgIcon = <Icon name={props.icon} size={50} color="white" />;
+    imgIcon = <Icon name={props.icon} size={60} color="white" />;
   } else if (props.title === 'Skating') {
-    imgIcon = <Icon name={props.icon} size={50} color="white" />;
+    imgIcon = <Icon name={props.icon} size={60} color="white" />;
   } else if (props.title === 'Golf') {
-    imgIcon = <IconMat name={props.icon} size={50} color="white" />;
+    imgIcon = <IconMat name={props.icon} size={60} color="white" />;
   } else if (props.title === 'Badminton') {
-    imgIcon = <IconMat name={props.icon} size={50} color="white" />;
+    imgIcon = <IconMat name={props.icon} size={60} color="white" />;
   }
   return (
     <TouchableOpacity style={styles.gridItem} onPress={props.onSelect}>
