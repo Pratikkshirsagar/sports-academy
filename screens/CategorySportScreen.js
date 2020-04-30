@@ -1,16 +1,41 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, FlatList } from 'react-native';
 
 import { CATEGORIES } from '../data/dummy-data';
+import { SPORTS } from '../data/dummy-data';
+
+import SportItem from '../components/SportItem';
 
 const CategorySportScreen = (props) => {
+  const catRefId = props.navigation.getParam('categoryId');
+  console.log(catRefId);
+  const renderSportItem = (itemData) => {
+    return (
+      <SportItem
+        title={itemData.item.title}
+        location={itemData.item.location[0]}
+        affordability={itemData.item.affordability}
+        image={itemData.item.imageUrl}
+        onSelectSport={() => {
+          props.navigation.navigate({
+            routeName: 'SportDetail',
+            params: {
+              sportId: itemData.item.id,
+              catRefId: catRefId,
+            },
+          });
+        }}
+      />
+    );
+  };
+
   const catId = props.navigation.getParam('categoryId');
-  console.log(catId);
   const selectedCategory = CATEGORIES.find((cat) => cat.id === catId);
+  const displaySport = SPORTS[catId];
 
   return (
     <View style={styles.screen}>
-      <Text>{selectedCategory.title}</Text>
+      <FlatList data={displaySport} renderItem={renderSportItem} style={{ width: '95%' }} />
     </View>
   );
 };

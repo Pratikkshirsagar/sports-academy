@@ -13,7 +13,7 @@ export const CATEGORIES = [
   new Category('c10', 'Golf', '#b9ffb0', 'golf'),
 ];
 
-export const SPORT = {
+export const SPORTS = {
   c1: [
     {
       id: 'g1',
