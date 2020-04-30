@@ -8,7 +8,6 @@ import SportItem from '../components/SportItem';
 
 const CategorySportScreen = (props) => {
   const catRefId = props.navigation.getParam('categoryId');
-  console.log(catRefId);
   const renderSportItem = (itemData) => {
     return (
       <SportItem

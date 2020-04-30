@@ -1,17 +1,34 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
+import { SPORTS } from '../data/dummy-data';
 
 function SportDetailScreen(props) {
   const catId = props.navigation.getParam('catRefId');
   const sportId = props.navigation.getParam('sportId');
 
-  console.log(sportId, catId);
+  const selectedCat = SPORTS[catId];
+
+  let selectedSport = selectedCat.find((obj) => obj.id == sportId);
+
   return (
     <View style={styles.screen}>
-      <Text>{(sportId, catId)}</Text>
+      <Text>{selectedSport.title}</Text>
     </View>
   );
 }
+
+SportDetailScreen.navigationOptions = (navigationData) => {
+  const catId = navigationData.navigation.getParam('catRefId');
+  const sportId = navigationData.navigation.getParam('sportId');
+
+  const selectedCat = SPORTS[catId];
+
+  let selectedSport = selectedCat.find((obj) => obj.id == sportId);
+
+  return {
+    headerTitle: selectedSport.title,
+  };
+};
 
 const styles = StyleSheet.create({
   screen: {
