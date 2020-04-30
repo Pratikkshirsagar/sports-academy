@@ -1,6 +1,9 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { SPORTS } from '../data/dummy-data';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+
+import CustomeHeaderButton from '../components/HeaderButton';
 
 function SportDetailScreen(props) {
   const catId = props.navigation.getParam('catRefId');
@@ -27,7 +30,17 @@ SportDetailScreen.navigationOptions = (navigationData) => {
 
   return {
     headerTitle: selectedSport.title,
-    headerRight: () => <Text>FAV!</Text>,
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={CustomeHeaderButton}>
+        <Item
+          title="Favorite"
+          iconName="ios-star"
+          onPress={() => {
+            console.log('Mark as favorite!');
+          }}
+        />
+      </HeaderButtons>
+    ),
   };
 };
 
