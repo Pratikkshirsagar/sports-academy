@@ -13,6 +13,20 @@ import WelcomeScreen from '../screens/WelcomeScreen';
 import Colors from '../constants/Colors';
 import FavoritesScreen from '../screens/FavoritesScreen';
 
+const defaultStackNavOptions = {
+  headerStyle: {
+    backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '',
+  },
+  headerTitleStyle: {
+    fontFamily: 'open-sans-bold',
+  },
+  headerBackTitleStyle: {
+    fontFamily: 'open-sans',
+  },
+  headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor,
+  headerTitle: 'A Screen',
+};
+
 const SportsNavigator = createStackNavigator(
   {
     Categories: {
@@ -24,12 +38,17 @@ const SportsNavigator = createStackNavigator(
     SportDetail: SportDetailScreen,
   },
   {
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '',
-      },
-      headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor,
-    },
+    defaultNavigationOptions: defaultStackNavOptions,
+  }
+);
+
+const FavNavigation = createStackNavigator(
+  {
+    Favorites: FavoritesScreen,
+    SportDetail: SportDetailScreen,
+  },
+  {
+    defaultNavigationOptions: defaultStackNavOptions,
   }
 );
 
