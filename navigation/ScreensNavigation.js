@@ -4,6 +4,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 
 import CategoriesScreen from '../screens/CategoriesScreen';
 import CategorySportScreen from '../screens/CategorySportScreen';
@@ -32,31 +33,41 @@ const SportsNavigator = createStackNavigator(
   }
 );
 
-const SportsFavTabNavigator = createBottomTabNavigator(
-  {
-    Home: {
-      screen: SportsNavigator,
-      navigationOptions: {
-        tabBarIcon: (tabInfo) => {
-          return <Ionicons name="ios-home" size={27} color={tabInfo.tintColor} />;
-        },
+const tabScreenConfig = {
+  Home: {
+    screen: SportsNavigator,
+    navigationOptions: {
+      tabBarIcon: (tabInfo) => {
+        return <Ionicons name="ios-home" size={27} color={tabInfo.tintColor} />;
       },
-    },
-    Favorites: {
-      screen: FavoritesScreen,
-      navigationOptions: {
-        tabBarIcon: (tabInfo) => {
-          return <Ionicons name="ios-star" size={27} color={tabInfo.tintColor} />;
-        },
-      },
+      tabBarColor: Colors.primaryColor,
     },
   },
-  {
-    tabBarOptions: {
-      activeTintColor: Colors.accentColor,
+  Favorites: {
+    screen: FavoritesScreen,
+    navigationOptions: {
+      tabBarIcon: (tabInfo) => {
+        return <Ionicons name="ios-star" size={27} color={tabInfo.tintColor} />;
+      },
+      tabBarColor: Colors.accentColor,
     },
-  }
-);
+  },
+};
+
+const SportsFavTabNavigator =
+  Platform.OS === 'android'
+    ? createMaterialBottomTabNavigator(tabScreenConfig, {
+        activeTintColor: 'white',
+        shifting: true,
+        barStyle: {
+          backgroundColor: Colors.primaryColor,
+        },
+      })
+    : createBottomTabNavigator(tabScreenConfig, {
+        tabBarOptions: {
+          activeTintColor: Colors.accentColor,
+        },
+      });
 
 const AppSwitchNavigater = createSwitchNavigator({
   WelcomeScreen: WelcomeScreen,
