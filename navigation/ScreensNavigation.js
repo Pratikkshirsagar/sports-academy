@@ -63,7 +63,7 @@ const tabScreenConfig = {
     },
   },
   Favorites: {
-    screen: FavoritesScreen,
+    screen: FavNavigation,
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
         return <Ionicons name="ios-star" size={27} color={tabInfo.tintColor} />;
