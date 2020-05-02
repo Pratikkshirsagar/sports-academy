@@ -6,7 +6,7 @@ const WelcomeScreen = (props) => {
   const [password, setPassword] = useState('');
 
   const onSignIn = () => {
-    props.navigation.navigate('SportsNavigator');
+    props.navigation.navigate('Home');
   };
   const onSignUp = () => {};
 
