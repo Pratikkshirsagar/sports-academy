@@ -11,6 +11,7 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import CategoriesScreen from '../screens/CategoriesScreen';
 import CategorySportScreen from '../screens/CategorySportScreen';
 import SportDetailScreen from '../screens/SportDetailScreen';
+import LoginScreen from '../screens/LoginScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import Colors from '../constants/Colors';
 import FavoritesScreen from '../screens/FavoritesScreen';
@@ -123,6 +124,7 @@ const SportsFavTabNavigator =
 
 const AppSwitchNavigater = createSwitchNavigator({
   WelcomeScreen: WelcomeScreen,
+  LoginScreen: LoginScreen,
   SportsNavigator: SportsFavTabNavigator,
 });
 

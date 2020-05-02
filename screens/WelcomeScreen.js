@@ -1,43 +1,13 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-
+import Icon from 'react-native-vector-icons/Entypo';
 const WelcomeScreen = (props) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const onSignIn = () => {
-    props.navigation.navigate('Home');
-  };
-  const onSignUp = () => {};
-
   return (
     <View style={styles.container}>
+      <Icon name="sports-club" size={90} color="white" />
       <Text style={styles.logo}>Sports Academy</Text>
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.inputText}
-          placeholder="Email..."
-          placeholderTextColor="#003f5c"
-          onChangeText={(text) => setEmail(text)}
-        />
-      </View>
-      <View style={styles.inputView}>
-        <TextInput
-          secureTextEntry
-          style={styles.inputText}
-          placeholder="Password..."
-          placeholderTextColor="#003f5c"
-          onChangeText={(text) => setPassword(text)}
-        />
-      </View>
-      <TouchableOpacity>
-        <Text style={styles.forgot}>Forgot Password?</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.loginBtn} onPress={onSignIn}>
-        <Text style={styles.loginText}>LOGIN</Text>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <Text style={styles.loginText}>Signup</Text>
+      <TouchableOpacity style={styles.loginBtn} onPress={() => props.navigation.navigate('LoginScreen')}>
+        <Text style={styles.loginText}>Next</Text>
       </TouchableOpacity>
     </View>
   );
@@ -54,6 +24,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: '#ff6f00',
     marginBottom: 40,
+    marginTop: 5,
   },
   inputView: {
     width: '80%',
