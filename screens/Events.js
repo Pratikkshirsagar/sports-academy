@@ -4,7 +4,7 @@ import { Text, View, StyleSheet } from 'react-native';
 const Events = () => {
   return (
     <View style={styles.screen}>
-      <Text>My Account</Text>
+      <Text>Events</Text>
     </View>
   );
 };

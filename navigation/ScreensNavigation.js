@@ -4,6 +4,8 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import IconMat from 'react-native-vector-icons/MaterialCommunityIcons';
+import IconEve from 'react-native-vector-icons/MaterialIcons';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 
 import CategoriesScreen from '../screens/CategoriesScreen';
@@ -12,6 +14,10 @@ import SportDetailScreen from '../screens/SportDetailScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import Colors from '../constants/Colors';
 import FavoritesScreen from '../screens/FavoritesScreen';
+import MyAccount from '../screens/MyAccount';
+import ClickToCall from '../screens/ClickToCall';
+import Events from '../screens/Events';
+import Notification from '../screens/Notification';
 
 const defaultStackNavOptions = {
   headerStyle: {
@@ -53,6 +59,24 @@ const FavNavigation = createStackNavigator(
 );
 
 const tabScreenConfig = {
+  MyAccount: {
+    screen: MyAccount,
+    navigationOptions: {
+      tabBarIcon: (tabInfo) => {
+        return <IconMat name="account" size={27} color={tabInfo.tintColor} />;
+      },
+      tabBarColor: Colors.primaryColor,
+    },
+  },
+  ClickToCall: {
+    screen: ClickToCall,
+    navigationOptions: {
+      tabBarIcon: (tabInfo) => {
+        return <Ionicons name="ios-call" size={27} color={tabInfo.tintColor} />;
+      },
+      tabBarColor: Colors.accentColor,
+    },
+  },
   Home: {
     screen: SportsNavigator,
     navigationOptions: {
@@ -62,13 +86,22 @@ const tabScreenConfig = {
       tabBarColor: Colors.primaryColor,
     },
   },
-  Favorites: {
-    screen: FavNavigation,
+  Events: {
+    screen: Events,
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
-        return <Ionicons name="ios-star" size={27} color={tabInfo.tintColor} />;
+        return <IconEve name="event" size={27} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.accentColor,
+    },
+  },
+  Notification: {
+    screen: Notification,
+    navigationOptions: {
+      tabBarIcon: (tabInfo) => {
+        return <Ionicons name="ios-notifications" size={27} color={tabInfo.tintColor} />;
+      },
+      tabBarColor: Colors.primaryColor,
     },
   },
 };
