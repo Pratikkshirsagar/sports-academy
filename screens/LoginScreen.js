@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 
 const LoginScreen = (props) => {
   const [email, setEmail] = useState('');
@@ -15,8 +21,8 @@ const LoginScreen = (props) => {
       <View style={styles.inputView}>
         <TextInput
           style={styles.inputText}
-          placeholder="Email..."
-          placeholderTextColor="#003f5c"
+          placeholder='Email...'
+          placeholderTextColor='#4a148c'
           onChangeText={(text) => setEmail(text)}
         />
       </View>
@@ -24,8 +30,8 @@ const LoginScreen = (props) => {
         <TextInput
           secureTextEntry
           style={styles.inputText}
-          placeholder="Password..."
-          placeholderTextColor="#003f5c"
+          placeholder='Password...'
+          placeholderTextColor='#4a148c'
           onChangeText={(text) => setPassword(text)}
         />
       </View>
@@ -44,7 +50,7 @@ const LoginScreen = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#4a148c',
+    backgroundColor: '#f9f9f9',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -58,6 +64,7 @@ const styles = StyleSheet.create({
     width: '80%',
     backgroundColor: 'white',
     borderRadius: 25,
+    borderColor: 'green',
     height: 50,
     marginBottom: 20,
     justifyContent: 'center',
@@ -65,10 +72,11 @@ const styles = StyleSheet.create({
   },
   inputText: {
     height: 50,
-    color: 'white',
+    color: 'black',
+    borderColor: 'black',
   },
   forgot: {
-    color: 'white',
+    color: '#4a148c',
     fontSize: 11,
   },
   loginBtn: {
