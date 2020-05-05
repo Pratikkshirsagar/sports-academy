@@ -10,12 +10,12 @@ const List = [
   {
     key: '2',
     title: 'A/c DepartMent',
-    phoneNumber: '+91223-04748373',
+    phoneNumber: '+91223-37748373',
   },
   {
     key: '3',
     title: 'Membership Enquiry',
-    phoneNumber: '+91223-04748373',
+    phoneNumber: '+919989213101',
   },
   {
     key: '4',
@@ -46,7 +46,12 @@ const ClickToCall = () => {
             {itemData.item.title}
           </Text>
           <Text
-            style={{ fontSize: 18, paddingBottom: 20 }}
+            style={{
+              fontSize: 18,
+              paddingBottom: 20,
+              color: '#4a148c',
+              textDecorationLine: 'underline',
+            }}
             onPress={() => {
               Linking.openURL(`tel:${itemData.item.phoneNumber}`);
             }}
