@@ -4,35 +4,35 @@ import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 const List = [
   {
-    id: 1,
+    id: '1',
     title: 'AFC Club will remain closed',
     description:
       'We have made the difficult decision based on our understanding of the situation regarding social distancing, minimizing contamination The Continental Gallery will be closed until further notice.',
     date: '13-03-2020',
   },
   {
-    id: 2,
+    id: '2',
     title: 'Yoga Sesions',
     description:
       'We have made the difficult decision based on our understanding of the situation regarding social distancing, minimizing contamination The Continental Gallery will be closed until further notice.',
     date: '13-03-2020',
   },
   {
-    id: 3,
+    id: '3',
     title: 'Ikon Gym Offer',
     description:
       'We have made the difficult decision based on our understanding of the situation regarding social distancing, minimizing contamination The Continental Gallery will be closed until further notice.',
     date: '13-03-2020',
   },
   {
-    id: 4,
+    id: '4',
     title: 'Holi Festival',
     description:
       'We have made the difficult decision based on our understanding of the situation regarding social distancing, minimizing contamination The Continental Gallery will be closed until further notice.',
     date: '13-03-2020',
   },
   {
-    id: 5,
+    id: '5',
     title: 'Womans Day',
     description:
       'We have made the difficult decision based on our understanding of the situation regarding social distancing, minimizing contamination The Continental Gallery will be closed until further notice.',
