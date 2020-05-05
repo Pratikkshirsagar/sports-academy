@@ -61,6 +61,28 @@ const FavNavigation = createStackNavigator(
   }
 );
 
+const CallService = createStackNavigator(
+  {
+    ClickToCall: ClickToCall,
+  },
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '',
+      },
+      headerTitleStyle: {
+        fontFamily: 'open-sans-bold',
+      },
+      headerBackTitleStyle: {
+        fontFamily: 'open-sans',
+      },
+      headerTintColor:
+        Platform.OS === 'android' ? 'white' : Colors.primaryColor,
+      headerTitle: 'Click To Call',
+    },
+  }
+);
+
 const tabScreenConfig = {
   MyAccount: {
     screen: MyAccount,
@@ -72,7 +94,7 @@ const tabScreenConfig = {
     },
   },
   ClickToCall: {
-    screen: ClickToCall,
+    screen: CallService,
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
         return <Ionicons name='ios-call' size={27} color={tabInfo.tintColor} />;
