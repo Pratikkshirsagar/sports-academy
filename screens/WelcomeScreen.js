@@ -1,12 +1,27 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 const WelcomeScreen = (props) => {
   return (
     <View style={styles.container}>
-      <Icon name="sports-club" size={90} color="white" />
+      <Image
+        source={{
+          uri: 'https://friendlymanager.com/media/52/slide1.png',
+        }}
+        style={{ width: 300, height: 200 }}
+      />
       <Text style={styles.logo}>Sports Academy</Text>
-      <TouchableOpacity style={styles.loginBtn} onPress={() => props.navigation.navigate('LoginScreen')}>
+      <TouchableOpacity
+        style={styles.loginBtn}
+        onPress={() => props.navigation.navigate('LoginScreen')}
+      >
         <Text style={styles.loginText}>Next</Text>
       </TouchableOpacity>
     </View>
@@ -15,14 +30,14 @@ const WelcomeScreen = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#4a148c',
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
   logo: {
     fontWeight: 'bold',
     fontSize: 40,
-    color: '#ff6f00',
+    color: '#4a148c',
     marginBottom: 40,
     marginTop: 5,
   },
@@ -50,7 +65,6 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 40,
     marginBottom: 10,
   },
   loginText: {

@@ -3,7 +3,7 @@ import { Platform } from 'react-native';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import {createDrawerNavigator} from 'react-navigation-drawer'
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import { Ionicons } from '@expo/vector-icons';
 import IconMat from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconEve from 'react-native-vector-icons/MaterialIcons';
@@ -20,7 +20,7 @@ import MyAccount from '../screens/MyAccount';
 import ClickToCall from '../screens/ClickToCall';
 import Events from '../screens/Events';
 import Notification from '../screens/Notification';
-import FiltersScreen from '../screens/FiltersScreen'
+import FiltersScreen from '../screens/FiltersScreen';
 
 const defaultStackNavOptions = {
   headerStyle: {
@@ -66,7 +66,7 @@ const tabScreenConfig = {
     screen: MyAccount,
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
-        return <IconMat name="account" size={27} color={tabInfo.tintColor} />;
+        return <IconMat name='account' size={27} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.primaryColor,
     },
@@ -75,7 +75,7 @@ const tabScreenConfig = {
     screen: ClickToCall,
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
-        return <Ionicons name="ios-call" size={27} color={tabInfo.tintColor} />;
+        return <Ionicons name='ios-call' size={27} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.accentColor,
     },
@@ -84,7 +84,7 @@ const tabScreenConfig = {
     screen: SportsNavigator,
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
-        return <Ionicons name="ios-home" size={27} color={tabInfo.tintColor} />;
+        return <Ionicons name='ios-home' size={27} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.primaryColor,
     },
@@ -93,7 +93,7 @@ const tabScreenConfig = {
     screen: Events,
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
-        return <IconEve name="event" size={27} color={tabInfo.tintColor} />;
+        return <IconEve name='event' size={27} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.accentColor,
     },
@@ -102,7 +102,13 @@ const tabScreenConfig = {
     screen: Notification,
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
-        return <Ionicons name="ios-notifications" size={27} color={tabInfo.tintColor} />;
+        return (
+          <Ionicons
+            name='ios-notifications'
+            size={27}
+            color={tabInfo.tintColor}
+          />
+        );
       },
       tabBarColor: Colors.primaryColor,
     },
@@ -124,26 +130,35 @@ const SportsFavTabNavigator =
         },
       });
 
-
 const FiltersNavigoter = createStackNavigator({
-        Filters: FiltersScreen
-      })
+  Filters: FiltersScreen,
+});
 
 FiltersNavigoter.navigationOptions = {
-  headerTitle: 'Filter Sports'
-}
+  headerTitle: 'Filter Sports',
+};
+
+const WelcomeNavigation = createStackNavigator(
+  {
+    WelcomeScreen: WelcomeScreen,
+    LoginScreen: LoginScreen,
+  },
+  {
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false,
+    },
+  }
+);
 
 const MainNavigation = createDrawerNavigator({
   SportsFavs: SportsFavTabNavigator,
-  Filters: FiltersNavigoter
-})
-
-const AppSwitchNavigater = createSwitchNavigator({
-  WelcomeScreen: WelcomeScreen,
-  LoginScreen: LoginScreen,
-  SportsNavigator: MainNavigation,
+  Filters: FiltersNavigoter,
 });
 
-
+const AppSwitchNavigater = createSwitchNavigator({
+  WelcomeScreen: WelcomeNavigation,
+  SportsNavigator: MainNavigation,
+});
 
 export default createAppContainer(AppSwitchNavigater);
