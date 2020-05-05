@@ -42,12 +42,19 @@ const ClickToCall = () => {
         }}
       >
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          <Text style={{ fontSize: 18, paddingBottom: 20 }}>
+          <Text
+            style={{
+              fontFamily: 'open-sans-bold',
+              fontSize: 16,
+              paddingBottom: 20,
+            }}
+          >
             {itemData.item.title}
           </Text>
           <Text
             style={{
-              fontSize: 18,
+              fontFamily: 'open-sans-bold',
+              fontSize: 16,
               paddingBottom: 20,
               color: '#4a148c',
               textDecorationLine: 'underline',
