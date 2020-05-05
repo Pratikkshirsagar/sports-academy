@@ -3,6 +3,7 @@ import { Platform } from 'react-native';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import {createDrawerNavigator} from 'react-navigation-drawer'
 import { Ionicons } from '@expo/vector-icons';
 import IconMat from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconEve from 'react-native-vector-icons/MaterialIcons';
@@ -19,6 +20,7 @@ import MyAccount from '../screens/MyAccount';
 import ClickToCall from '../screens/ClickToCall';
 import Events from '../screens/Events';
 import Notification from '../screens/Notification';
+import FiltersScreen from '../screens/FiltersScreen'
 
 const defaultStackNavOptions = {
   headerStyle: {
@@ -122,10 +124,26 @@ const SportsFavTabNavigator =
         },
       });
 
+
+const FiltersNavigoter = createStackNavigator({
+        Filters: FiltersScreen
+      })
+
+FiltersNavigoter.navigationOptions = {
+  headerTitle: 'Filter Sports'
+}
+
+const MainNavigation = createDrawerNavigator({
+  SportsFavs: SportsFavTabNavigator,
+  Filters: FiltersNavigoter
+})
+
 const AppSwitchNavigater = createSwitchNavigator({
   WelcomeScreen: WelcomeScreen,
   LoginScreen: LoginScreen,
-  SportsNavigator: SportsFavTabNavigator,
+  SportsNavigator: MainNavigation,
 });
+
+
 
 export default createAppContainer(AppSwitchNavigater);
