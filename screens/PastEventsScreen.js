@@ -9,6 +9,12 @@ const PastEvents = () => {
   );
 };
 
+PastEvents.navigationOptions = (navigationData) => {
+  return {
+    headerTitle: 'Past Events',
+  };
+};
+
 const styles = StyleSheet.create({
   screen: {
     flex: 1,

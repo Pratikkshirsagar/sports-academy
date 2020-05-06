@@ -9,6 +9,12 @@ const UpcomingEvents = () => {
   );
 };
 
+UpcomingEvents.navigationOptions = (navigationData) => {
+  return {
+    headerTitle: 'Upcoming Events',
+  };
+};
+
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
