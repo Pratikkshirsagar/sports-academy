@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   signInText: {
-    paddingTop: 10,
+    paddingTop: 7,
     color: '#ff6f00',
     fontFamily: 'open-sans-bold',
     fontSize: 18,
