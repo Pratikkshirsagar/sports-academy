@@ -42,7 +42,7 @@ const LoginScreen = (props) => {
         <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>
       <TouchableOpacity>
-        <Text style={styles.loginText}>Signup</Text>
+        <Text style={styles.signInText}>Signup</Text>
       </TouchableOpacity>
     </View>
   );
@@ -64,7 +64,8 @@ const styles = StyleSheet.create({
     width: '80%',
     backgroundColor: 'white',
     borderRadius: 25,
-    borderColor: 'green',
+    borderColor: '#4a148c',
+    borderWidth: 2,
     height: 50,
     marginBottom: 20,
     justifyContent: 'center',
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
   inputText: {
     height: 50,
     color: 'black',
-    borderColor: 'black',
+    fontFamily: 'open-sans',
   },
   forgot: {
     color: '#4a148c',
@@ -90,7 +91,15 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   loginText: {
-    color: 'white',
+    color: '#ffff',
+    fontFamily: 'open-sans-bold',
+    fontSize: 18,
+  },
+  signInText: {
+    paddingTop: 10,
+    color: '#ff6f00',
+    fontFamily: 'open-sans-bold',
+    fontSize: 18,
   },
 });
 export default LoginScreen;
