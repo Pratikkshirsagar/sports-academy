@@ -83,6 +83,28 @@ const CallService = createStackNavigator(
   }
 );
 
+const EventsService = createStackNavigator(
+  {
+    ClickToCall: Events,
+  },
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '',
+      },
+      headerTitleStyle: {
+        fontFamily: 'open-sans-bold',
+      },
+      headerBackTitleStyle: {
+        fontFamily: 'open-sans',
+      },
+      headerTintColor:
+        Platform.OS === 'android' ? 'white' : Colors.primaryColor,
+      headerTitle: 'Events',
+    },
+  }
+);
+
 const NotificationService = createStackNavigator(
   {
     Notifications: Notification,
@@ -134,7 +156,7 @@ const tabScreenConfig = {
     },
   },
   Events: {
-    screen: Events,
+    screen: EventsService,
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
         return <IconEve name='event' size={27} color={tabInfo.tintColor} />;
