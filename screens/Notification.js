@@ -54,7 +54,7 @@ const Notification = () => {
             borderBottomWidth: 2,
             paddingBottom: 10,
             flex: 1,
-            paddingRight: 30,
+            paddingRight: 35,
           }}
         >
           <View style={{ paddingRight: 10 }}>
