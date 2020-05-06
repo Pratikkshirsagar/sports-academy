@@ -21,6 +21,8 @@ import ClickToCall from '../screens/ClickToCall';
 import Events from '../screens/Events';
 import Notification from '../screens/Notification';
 import FiltersScreen from '../screens/FiltersScreen';
+import PastEvents from '../screens/UpcomingEventsScreen';
+import UpcomingEvents from '../screens/UpcomingEventsScreen';
 
 const defaultStackNavOptions = {
   headerStyle: {
@@ -85,7 +87,9 @@ const CallService = createStackNavigator(
 
 const EventsService = createStackNavigator(
   {
-    ClickToCall: Events,
+    Events: Events,
+    PastEvents: PastEvents,
+    UpcomingEvents: UpcomingEvents,
   },
   {
     defaultNavigationOptions: {
@@ -100,7 +104,6 @@ const EventsService = createStackNavigator(
       },
       headerTintColor:
         Platform.OS === 'android' ? 'white' : Colors.primaryColor,
-      headerTitle: 'Events',
     },
   }
 );
