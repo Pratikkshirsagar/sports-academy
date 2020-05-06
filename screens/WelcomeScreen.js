@@ -69,6 +69,8 @@ const styles = StyleSheet.create({
   },
   loginText: {
     color: 'white',
+    fontFamily: 'open-sans-bold',
+    fontSize: 18,
   },
 });
 export default WelcomeScreen;
