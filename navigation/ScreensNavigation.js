@@ -21,7 +21,7 @@ import ClickToCall from '../screens/ClickToCall';
 import Events from '../screens/Events';
 import Notification from '../screens/Notification';
 import FiltersScreen from '../screens/FiltersScreen';
-import PastEvents from '../screens/UpcomingEventsScreen';
+import PastEvents from '../screens/PastEventsScreen';
 import UpcomingEvents from '../screens/UpcomingEventsScreen';
 
 const defaultStackNavOptions = {
