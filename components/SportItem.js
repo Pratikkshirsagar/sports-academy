@@ -16,8 +16,8 @@ const SportItem = (props) => {
             </ImageBackground>
           </View>
           <View style={{ ...styles.sportRow, ...styles.sportDetail }}>
-            <Text>{props.location.toUpperCase()}</Text>
-            <Text>{props.affordability.toUpperCase()}</Text>
+            <Text style={{ fontFamily: 'open-sans' }}>{props.location.toUpperCase()}</Text>
+            <Text style={{ fontFamily: 'open-sans' }}>{props.affordability.toUpperCase()}</Text>
           </View>
         </View>
       </TouchableOpacity>
