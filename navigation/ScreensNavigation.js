@@ -28,7 +28,12 @@ const defaultStackNavOptions = {
   headerStyle: {
     backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '',
   },
-  headerTitleStyle: {},
+  headerTitleStyle: {
+    fontFamily: 'open-sans-bold',
+  },
+  headerBackTitleStyle: {
+    fontFamily: 'open-sans',
+  },
   headerTitleStyle: {
     fontFamily: 'open-sans-bold',
   },
@@ -187,6 +192,9 @@ const SportsFavTabNavigator =
       })
     : createBottomTabNavigator(tabScreenConfig, {
         tabBarOptions: {
+          labelStyle: {
+            fontSize: 'open-sans',
+          },
           activeTintColor: Colors.accentColor,
         },
       });
