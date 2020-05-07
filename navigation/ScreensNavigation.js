@@ -28,6 +28,7 @@ const defaultStackNavOptions = {
   headerStyle: {
     backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '',
   },
+  headerTitleStyle: {},
   headerTitleStyle: {
     fontFamily: 'open-sans-bold',
   },
@@ -78,8 +79,7 @@ const CallService = createStackNavigator(
       headerBackTitleStyle: {
         fontFamily: 'open-sans',
       },
-      headerTintColor:
-        Platform.OS === 'android' ? 'white' : Colors.primaryColor,
+      headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor,
       headerTitle: 'Click To Call',
     },
   }
@@ -102,8 +102,7 @@ const EventsService = createStackNavigator(
       headerBackTitleStyle: {
         fontFamily: 'open-sans',
       },
-      headerTintColor:
-        Platform.OS === 'android' ? 'white' : Colors.primaryColor,
+      headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor,
     },
   }
 );
@@ -123,8 +122,7 @@ const NotificationService = createStackNavigator(
       headerBackTitleStyle: {
         fontFamily: 'open-sans',
       },
-      headerTintColor:
-        Platform.OS === 'android' ? 'white' : Colors.primaryColor,
+      headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor,
       headerTitle: 'Notifications',
     },
   }
@@ -135,7 +133,7 @@ const tabScreenConfig = {
     screen: MyAccount,
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
-        return <IconMat name='account' size={27} color={tabInfo.tintColor} />;
+        return <IconMat name="account" size={27} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.primaryColor,
     },
@@ -144,7 +142,7 @@ const tabScreenConfig = {
     screen: CallService,
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
-        return <Ionicons name='ios-call' size={27} color={tabInfo.tintColor} />;
+        return <Ionicons name="ios-call" size={27} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.accentColor,
     },
@@ -153,7 +151,7 @@ const tabScreenConfig = {
     screen: SportsNavigator,
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
-        return <Ionicons name='ios-home' size={27} color={tabInfo.tintColor} />;
+        return <Ionicons name="ios-home" size={27} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.primaryColor,
     },
@@ -162,7 +160,7 @@ const tabScreenConfig = {
     screen: EventsService,
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
-        return <IconEve name='event' size={27} color={tabInfo.tintColor} />;
+        return <IconEve name="event" size={27} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.accentColor,
     },
@@ -171,13 +169,7 @@ const tabScreenConfig = {
     screen: NotificationService,
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
-        return (
-          <Ionicons
-            name='ios-notifications'
-            size={27}
-            color={tabInfo.tintColor}
-          />
-        );
+        return <Ionicons name="ios-notifications" size={27} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.primaryColor,
     },
@@ -220,10 +212,25 @@ const WelcomeNavigation = createStackNavigator(
   }
 );
 
-const MainNavigation = createDrawerNavigator({
-  SportsFavs: SportsFavTabNavigator,
-  Filters: FiltersNavigoter,
-});
+const MainNavigation = createDrawerNavigator(
+  {
+    SportsFavs: {
+      screen: SportsFavTabNavigator,
+      navigationOptions: {
+        drawerLabel: 'Sports',
+      },
+    },
+    Filters: FiltersNavigoter,
+  },
+  {
+    contentOptions: {
+      activeTintColor: Colors.accentColor,
+      labelStyle: {
+        fontFamily: 'open-sans-bold',
+      },
+    },
+  }
+);
 
 const AppSwitchNavigater = createSwitchNavigator({
   WelcomeScreen: WelcomeNavigation,
