@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, Text } from 'react-native';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
@@ -141,6 +141,12 @@ const tabScreenConfig = {
         return <IconMat name="account" size={27} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.primaryColor,
+      tabBarLabel:
+        Platform.Os === 'android' ? (
+          <Text style={{ fontFamily: 'open-sans-bold' }}>My Account</Text>
+        ) : (
+          'My Account'
+        ),
     },
   },
   ClickToCall: {
@@ -150,6 +156,12 @@ const tabScreenConfig = {
         return <Ionicons name="ios-call" size={27} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.accentColor,
+      tabBarLabel:
+        Platform.Os === 'android' ? (
+          <Text style={{ fontFamily: 'open-sans-bold' }}>Click To Call</Text>
+        ) : (
+          'Click To Call'
+        ),
     },
   },
   Home: {
@@ -159,6 +171,12 @@ const tabScreenConfig = {
         return <Ionicons name="ios-home" size={27} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.primaryColor,
+      tabBarLabel:
+        Platform.Os === 'android' ? (
+          <Text style={{ fontFamily: 'open-sans-bold' }}>Home</Text>
+        ) : (
+          'Home'
+        ),
     },
   },
   Events: {
@@ -168,6 +186,12 @@ const tabScreenConfig = {
         return <IconEve name="event" size={27} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.accentColor,
+      tabBarLabel:
+        Platform.Os === 'android' ? (
+          <Text style={{ fontFamily: 'open-sans-bold' }}>Events</Text>
+        ) : (
+          'Events'
+        ),
     },
   },
   Notification: {
@@ -177,6 +201,12 @@ const tabScreenConfig = {
         return <Ionicons name="ios-notifications" size={27} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.primaryColor,
+      tabBarLabel:
+        Platform.Os === 'android' ? (
+          <Text style={{ fontFamily: 'open-sans-bold' }}>Notifications</Text>
+        ) : (
+          'Notifications'
+        ),
     },
   },
 };
