@@ -4,7 +4,9 @@ import { Text, View, StyleSheet } from 'react-native';
 const UpcomingEvents = () => {
   return (
     <View style={styles.screen}>
-      <Text>UpComing Events</Text>
+      <Text style={{ fontFamily: 'open-sans-bold', fontSize: 18, color: '#4a148c' }}>
+        Upcoming events not available
+      </Text>
     </View>
   );
 };
