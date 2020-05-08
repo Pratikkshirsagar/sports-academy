@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
+import { AntDesign } from '@expo/vector-icons';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 import { SPORTS } from '../data/dummy-data';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
@@ -82,7 +84,7 @@ function SportDetailScreen(props) {
       </View>
       <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 20 }}>
         <View>
-          <Text style={{ fontSize: 18, fontFamily: 'open-sans-bold' }}>Select schedule</Text>
+          <Text style={{ fontSize: 15, fontFamily: 'open-sans-bold' }}>Select schedule</Text>
           <Dropdown
             dropdownMargins={{ min: 16, max: 20 }}
             itemPadding={10}
@@ -96,7 +98,7 @@ function SportDetailScreen(props) {
           />
         </View>
         <View>
-          <Text style={{ fontSize: 18, fontFamily: 'open-sans-bold' }}>Select Time</Text>
+          <Text style={{ fontSize: 16, fontFamily: 'open-sans-bold' }}>Select Time</Text>
           <Dropdown
             dropdownMargins={{ min: 16, max: 20 }}
             itemPadding={10}
@@ -107,6 +109,12 @@ function SportDetailScreen(props) {
             data={timing}
             onChangeText={(val) => handleTime(val)}
           />
+        </View>
+        <View style={{ alignItems: 'baseline' }}>
+          <Text style={{ fontSize: 16, fontFamily: 'open-sans-bold' }}>Select Date</Text>
+          <View style={{ marginTop: 20, paddingLeft: 30 }}>
+            <AntDesign name="calendar" size={35} color="#4a148c" />
+          </View>
         </View>
       </View>
       <View>
@@ -178,7 +186,7 @@ const styles = StyleSheet.create({
   },
   timing: {
     fontFamily: 'open-sans-bold',
-    fontSize: 15,
+    fontSize: 14,
     color: '#ff6f00',
   },
   bookingText: {
