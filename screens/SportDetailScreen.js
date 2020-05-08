@@ -92,9 +92,6 @@ function SportDetailScreen(props) {
     <ScrollView>
       <Image source={{ uri: selectedSport.imageUrl }} style={styles.image} />
       <View style={{ ...styles.sportRow, ...styles.sportDetail }}></View>
-      <View style={styles.screen}>
-        <Text style={styles.title}>{selectedSport.title}</Text>
-      </View>
       <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 20 }}>
         <View>
           <Text style={{ fontSize: 15, fontFamily: 'open-sans-bold' }}>Select schedule</Text>
