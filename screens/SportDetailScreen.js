@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet, ScrollView, Image } from 'react-native';
+import { Text, View, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
 
 import { SPORTS } from '../data/dummy-data';
@@ -53,23 +53,24 @@ function SportDetailScreen(props) {
     { value: '11:00PM' },
   ];
 
-  const display = {
-    shedule: String,
-    time: String,
+  const [timing, setTiming] = useState([]);
+  const [displayBookingShedule, setDisplayBookingShedule] = useState('');
+  const [displayTime, setDisplayTime] = useState('');
+  const handleShedule = (shedule) => {
+    if (shedule === 'Morning') {
+      setTiming(morning);
+      setDisplayBookingShedule(shedule);
+    } else if (shedule === 'Afternoon') {
+      setTiming(afternoon);
+      setDisplayBookingShedule(shedule);
+    } else if (shedule === 'Evening') {
+      setTiming(evening);
+      setDisplayBookingShedule(shedule);
+    }
   };
 
-  const handleShedule = (shedule) => {
-    display.shedule = schedule;
-    if (time.length > 1) {
-      time.splice(0, time.length);
-    }
-    if (shedule === 'Morning') {
-      time.push(...morning);
-    } else if (shedule === 'Afternoon') {
-      time.push(...afternoon);
-    } else if (shedule === 'Evening') {
-      time.push(...evening);
-    }
+  const handleTime = (time) => {
+    setDisplayTime(time);
   };
 
   return (
@@ -77,7 +78,7 @@ function SportDetailScreen(props) {
       <Image source={{ uri: selectedSport.imageUrl }} style={styles.image} />
       <View style={{ ...styles.sportRow, ...styles.sportDetail }}></View>
       <View style={styles.screen}>
-        <Text>{selectedSport.title}</Text>
+        <Text style={styles.title}>{selectedSport.title}</Text>
       </View>
       <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 20 }}>
         <View>
@@ -103,12 +104,28 @@ function SportDetailScreen(props) {
             labelFontSize={16}
             label={'select'}
             textColor="#4a148c"
-            data={time}
+            data={timing}
+            onChangeText={(val) => handleTime(val)}
           />
         </View>
       </View>
       <View>
-        <Text>{display.shedule}</Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            alignItems: 'center',
+            marginTop: 14,
+            marginRight: 18,
+          }}
+        >
+          <Text style={styles.timing}>
+            Your slot is Scheduled in {displayBookingShedule} at {displayTime}
+          </Text>
+        </View>
+        <TouchableOpacity style={styles.bookingBtn} onPress={() => props.navigation.navigate()}>
+          <Text style={styles.bookingText}>Confirm Booking</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -124,21 +141,27 @@ SportDetailScreen.navigationOptions = (navigationData) => {
 
   return {
     headerTitle: selectedSport.title,
-    headerRight: () => (
-      <HeaderButtons HeaderButtonComponent={CustomeHeaderButton}>
-        <Item
-          title="Favorite"
-          iconName="ios-star"
-          onPress={() => {
-            console.log('Mark as favorite!');
-          }}
-        />
-      </HeaderButtons>
-    ),
+    // headerRight: () => (
+    //   <HeaderButtons HeaderButtonComponent={CustomeHeaderButton}>
+    //     <Item
+    //       title="Favorite"
+    //       iconName="ios-star"
+    //       onPress={() => {
+    //         console.log('Mark as favorite!');
+    //       }}
+    //     />
+    //   </HeaderButtons>
+    // ),
   };
 };
 
 const styles = StyleSheet.create({
+  title: {
+    color: '#4a148c',
+    fontFamily: 'open-sans-bold',
+    fontSize: 18,
+  },
+
   screen: {
     flex: 1,
     justifyContent: 'center',
@@ -146,12 +169,33 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 200,
+    height: 160,
   },
   details: {
     flexDirection: 'row',
     padding: 15,
     justifyContent: 'space-around',
+  },
+  timing: {
+    fontFamily: 'open-sans-bold',
+    fontSize: 15,
+    color: '#ff6f00',
+  },
+  bookingText: {
+    color: 'white',
+    fontFamily: 'open-sans-bold',
+    fontSize: 18,
+  },
+  bookingBtn: {
+    width: '50%',
+    backgroundColor: '#4a148c',
+    borderRadius: 25,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+    marginLeft: 90,
+    marginTop: 30,
   },
 });
 
