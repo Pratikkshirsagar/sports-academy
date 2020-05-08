@@ -5,12 +5,24 @@ import { AntDesign } from '@expo/vector-icons';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 import { SPORTS } from '../data/dummy-data';
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import CustomeHeaderButton from '../components/HeaderButton';
 
 function SportDetailScreen(props) {
   const catId = props.navigation.getParam('catRefId');
   const sportId = props.navigation.getParam('sportId');
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date) => {
+    console.log(date.toDateString());
+    hideDatePicker();
+  };
 
   const selectedCat = SPORTS[catId];
 
@@ -58,6 +70,7 @@ function SportDetailScreen(props) {
   const [timing, setTiming] = useState([]);
   const [displayBookingShedule, setDisplayBookingShedule] = useState('');
   const [displayTime, setDisplayTime] = useState('');
+
   const handleShedule = (shedule) => {
     if (shedule === 'Morning') {
       setTiming(morning);
@@ -113,7 +126,13 @@ function SportDetailScreen(props) {
         <View style={{ alignItems: 'baseline' }}>
           <Text style={{ fontSize: 16, fontFamily: 'open-sans-bold' }}>Select Date</Text>
           <View style={{ marginTop: 20, paddingLeft: 30 }}>
-            <AntDesign name="calendar" size={35} color="#4a148c" />
+            <AntDesign name="calendar" size={35} color="#4a148c" onPress={showDatePicker} />
+            <DateTimePickerModal
+              isVisible={isDatePickerVisible}
+              mode="date"
+              onConfirm={handleConfirm}
+              onCancel={hideDatePicker}
+            />
           </View>
         </View>
       </View>
