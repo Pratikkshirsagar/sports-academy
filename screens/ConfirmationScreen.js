@@ -10,7 +10,7 @@ const ConfirmationScreen = (props) => {
 };
 
 ConfirmationScreen.navigationOptions = {
-  headerTitle: 'Confirmation',
+  headerTitle: 'Booking Confirmation',
 };
 
 const Styles = StyleSheet.create({
