@@ -23,7 +23,7 @@ import Notification from '../screens/Notification';
 import FiltersScreen from '../screens/FiltersScreen';
 import PastEvents from '../screens/PastEventsScreen';
 import UpcomingEvents from '../screens/UpcomingEventsScreen';
-
+import ConfirmationScreen from '../screens/ConfirmationScreen';
 const defaultStackNavOptions = {
   headerStyle: {
     backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '',
@@ -53,6 +53,7 @@ const SportsNavigator = createStackNavigator(
       screen: CategorySportScreen,
     },
     SportDetail: SportDetailScreen,
+    BookingConfirm: ConfirmationScreen,
   },
   {
     defaultNavigationOptions: defaultStackNavOptions,
