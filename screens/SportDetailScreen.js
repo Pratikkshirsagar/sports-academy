@@ -143,21 +143,12 @@ function SportDetailScreen(props) {
             marginTop: 14,
             marginRight: 18,
           }}
-        >
-          {/* <Text style={styles.timing}>
-            Your slot is Scheduled in {displayBookingShedule} at {displayTime}
-          </Text> */}
-        </View>
+        ></View>
         <TouchableOpacity
           style={styles.bookingBtn}
           onPress={() =>
             props.navigation.navigate({
               routeName: 'BookingConfirm',
-              params: {
-                schedule: displayBookingShedule,
-                time: displayTime,
-                date: displatBookingDate,
-              },
             })
           }
         >
@@ -178,17 +169,6 @@ SportDetailScreen.navigationOptions = (navigationData) => {
 
   return {
     headerTitle: selectedSport.title,
-    // headerRight: () => (
-    //   <HeaderButtons HeaderButtonComponent={CustomeHeaderButton}>
-    //     <Item
-    //       title="Favorite"
-    //       iconName="ios-star"
-    //       onPress={() => {
-    //         console.log('Mark as favorite!');
-    //       }}
-    //     />
-    //   </HeaderButtons>
-    // ),
   };
 };
 

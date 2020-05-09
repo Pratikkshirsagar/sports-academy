@@ -24,6 +24,7 @@ import FiltersScreen from '../screens/FiltersScreen';
 import PastEvents from '../screens/PastEventsScreen';
 import UpcomingEvents from '../screens/UpcomingEventsScreen';
 import ConfirmationScreen from '../screens/ConfirmationScreen';
+
 const defaultStackNavOptions = {
   headerStyle: {
     backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '',
