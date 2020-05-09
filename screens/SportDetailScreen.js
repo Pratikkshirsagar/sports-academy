@@ -70,6 +70,7 @@ function SportDetailScreen(props) {
   const [timing, setTiming] = useState([]);
   const [displayBookingShedule, setDisplayBookingShedule] = useState('');
   const [displayTime, setDisplayTime] = useState('');
+  const [bookingShedule, setBookingShedule] = useState('');
 
   const handleShedule = (shedule) => {
     if (shedule === 'Morning') {
@@ -143,9 +144,9 @@ function SportDetailScreen(props) {
             marginRight: 18,
           }}
         >
-          <Text style={styles.timing}>
+          {/* <Text style={styles.timing}>
             Your slot is Scheduled in {displayBookingShedule} at {displayTime}
-          </Text>
+          </Text> */}
         </View>
         <TouchableOpacity style={styles.bookingBtn} onPress={() => props.navigation.navigate()}>
           <Text style={styles.bookingText}>Confirm Booking</Text>
@@ -211,7 +212,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   bookingBtn: {
-    width: '50%',
+    width: '60%',
     backgroundColor: '#4a148c',
     borderRadius: 25,
     height: 50,
