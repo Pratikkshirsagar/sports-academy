@@ -10,7 +10,7 @@ function SportDetailScreen(props) {
   const catId = props.navigation.getParam('catRefId');
   const sportId = props.navigation.getParam('sportId');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-
+  const [displatBookingDate, setDisplayBookingDate] = useState('');
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
@@ -20,7 +20,7 @@ function SportDetailScreen(props) {
   };
 
   const handleConfirm = (date) => {
-    console.log(date.toDateString());
+    setDisplayBookingDate(date.toDateString());
     hideDatePicker();
   };
 
@@ -150,7 +150,16 @@ function SportDetailScreen(props) {
         </View>
         <TouchableOpacity
           style={styles.bookingBtn}
-          onPress={() => props.navigation.navigate('BookingConfirm')}
+          onPress={() =>
+            props.navigation.navigate({
+              routeName: 'BookingConfirm',
+              params: {
+                schedule: displayBookingShedule,
+                time: displayTime,
+                date: displatBookingDate,
+              },
+            })
+          }
         >
           <Text style={styles.bookingText}>Confirm Booking</Text>
         </TouchableOpacity>
