@@ -23,41 +23,49 @@ const MyAccount = () => {
         <View style={{ marginTop: 25 }}>
           <View style={{ flexDirection: 'row' }}>
             <View style={{ marginRight: 10 }}>
-              <Entypo name="home" size={30} color="white" />
+              <Entypo name="home" size={25} color="white" />
             </View>
             <View>
               <TouchableOpacity>
-                <Text style={{ color: 'white', fontSize: 23 }}>Home</Text>
+                <Text style={{ color: 'white', fontSize: 20, fontFamily: 'open-sans-bold' }}>
+                  Home
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
           <View style={{ flexDirection: 'row', marginTop: 30 }}>
             <View style={{ marginRight: 12 }}>
-              <Feather name="settings" size={24} color="white" />
+              <Feather name="settings" size={25} color="white" />
             </View>
             <View>
               <TouchableOpacity>
-                <Text style={{ color: 'white', fontSize: 23 }}>Setting</Text>
+                <Text style={{ color: 'white', fontSize: 20, fontFamily: 'open-sans-bold' }}>
+                  Setting
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
           <View style={{ flexDirection: 'row', marginTop: 30 }}>
             <View style={{ marginRight: 10 }}>
-              <Entypo name="open-book" size={30} color="white" />
+              <Entypo name="open-book" size={25} color="white" />
             </View>
             <View>
               <TouchableOpacity>
-                <Text style={{ color: 'white', fontSize: 23 }}>Booking</Text>
+                <Text style={{ color: 'white', fontSize: 20, fontFamily: 'open-sans-bold' }}>
+                  Booking
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
           <View style={{ flexDirection: 'row', marginTop: 30 }}>
             <View style={{ marginRight: 10 }}>
-              <AntDesign name="poweroff" size={24} color="white" />
+              <AntDesign name="poweroff" size={25} color="white" />
             </View>
             <View>
               <TouchableOpacity>
-                <Text style={{ color: 'white', fontSize: 23 }}>Logout</Text>
+                <Text style={{ color: 'white', fontSize: 20, fontFamily: 'open-sans-bold' }}>
+                  Logout
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
