@@ -148,7 +148,10 @@ function SportDetailScreen(props) {
             Your slot is Scheduled in {displayBookingShedule} at {displayTime}
           </Text> */}
         </View>
-        <TouchableOpacity style={styles.bookingBtn} onPress={() => props.navigation.navigate()}>
+        <TouchableOpacity
+          style={styles.bookingBtn}
+          onPress={() => props.navigation.navigate('BookingConfirm')}
+        >
           <Text style={styles.bookingText}>Confirm Booking</Text>
         </TouchableOpacity>
       </View>
