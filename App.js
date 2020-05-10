@@ -5,6 +5,10 @@ import { AppLoading } from 'expo';
 import { enableScreens } from 'react-native-screens';
 
 import AppSwitchNavigater from './navigation/ScreensNavigation';
+import * as firebase from 'firebase/app';
+import firebaseConfig from './config/config';
+// firebase init
+firebase.initializeApp(firebaseConfig);
 
 enableScreens();
 
