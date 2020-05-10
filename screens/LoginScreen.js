@@ -13,6 +13,7 @@ import 'firebase/auth';
 const LoginScreen = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSignIn = async () => {
     if (email && password) {
