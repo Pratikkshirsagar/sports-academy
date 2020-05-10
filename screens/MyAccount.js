@@ -4,7 +4,7 @@ import { Entypo } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
-const MyAccount = () => {
+const MyAccount = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -25,7 +25,7 @@ const MyAccount = () => {
               <Entypo name="home" size={25} color="white" />
             </View>
             <View>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => props.navigation.navigate('Home')}>
                 <Text style={{ color: 'white', fontSize: 20, fontFamily: 'open-sans-bold' }}>
                   Home
                 </Text>
@@ -58,7 +58,7 @@ const MyAccount = () => {
           </View>
           <View style={{ flexDirection: 'row', marginTop: 30 }}>
             <View style={{ marginRight: 10 }}>
-              <AntDesign name="poweroff" size={25} color="white" />
+              <AntDesign name="poweroff" size={23} color="white" />
             </View>
             <View>
               <TouchableOpacity>
