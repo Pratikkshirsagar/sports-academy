@@ -49,7 +49,7 @@ const MyAccount = (props) => {
               <Entypo name="open-book" size={25} color="white" />
             </View>
             <View>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => props.navigation.navigate('BookingHistory')}>
                 <Text style={{ color: 'white', fontSize: 20, fontFamily: 'open-sans-bold' }}>
                   Booking
                 </Text>
