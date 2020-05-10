@@ -62,15 +62,15 @@ const SportsNavigator = createStackNavigator(
   }
 );
 
-const FavNavigation = createStackNavigator(
-  {
-    Favorites: FavoritesScreen,
-    SportDetail: SportDetailScreen,
-  },
-  {
-    defaultNavigationOptions: defaultStackNavOptions,
-  }
-);
+// const FavNavigation = createStackNavigator(
+//   {
+//     Favorites: FavoritesScreen,
+//     SportDetail: SportDetailScreen,
+//   },
+//   {
+//     defaultNavigationOptions: defaultStackNavOptions,
+//   }
+// );
 
 const CallService = createStackNavigator(
   {
@@ -158,7 +158,7 @@ const tabScreenConfig = {
       tabBarIcon: (tabInfo) => {
         return <Ionicons name="ios-call" size={27} color={tabInfo.tintColor} />;
       },
-      tabBarColor: Colors.accentColor,
+      tabBarColor: Colors.primaryColor,
       tabBarLabel:
         Platform.Os === 'android' ? (
           <Text style={{ fontFamily: 'open-sans-bold' }}>Click To Call</Text>
@@ -188,7 +188,7 @@ const tabScreenConfig = {
       tabBarIcon: (tabInfo) => {
         return <IconEve name="event" size={27} color={tabInfo.tintColor} />;
       },
-      tabBarColor: Colors.accentColor,
+      tabBarColor: Colors.primaryColor,
       tabBarLabel:
         Platform.Os === 'android' ? (
           <Text style={{ fontFamily: 'open-sans-bold' }}>Events</Text>
