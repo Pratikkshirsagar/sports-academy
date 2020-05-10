@@ -234,7 +234,7 @@ const SportsFavTabNavigator =
 
 const BookingHistoryNavigation = createStackNavigator(
   {
-    BookingHistory: BookingScreen,
+    Booking: BookingScreen,
   },
   {
     defaultNavigationOptions: {
@@ -257,9 +257,26 @@ BookingHistoryNavigation.navigationOptions = {
   headerTitle: 'Booking History',
 };
 
-const FiltersNavigoter = createStackNavigator({
-  Filters: FiltersScreen,
-});
+const FiltersNavigoter = createStackNavigator(
+  {
+    Filters: FiltersScreen,
+  },
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '',
+      },
+      headerTitleStyle: {
+        fontFamily: 'open-sans-bold',
+      },
+      headerBackTitleStyle: {
+        fontFamily: 'open-sans',
+      },
+      headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor,
+      headerTitle: 'Filters',
+    },
+  }
+);
 
 FiltersNavigoter.navigationOptions = {
   headerTitle: 'Filter Sports',
@@ -287,7 +304,7 @@ const MainNavigation = createDrawerNavigator(
       },
     },
     Filters: FiltersNavigoter,
-    BookingHistory: BookingHistoryNavigation,
+    Booking: BookingHistoryNavigation,
   },
   {
     contentOptions: {
