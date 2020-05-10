@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+
 const MyAccount = () => {
   return (
     <View style={styles.container}>
@@ -12,13 +13,11 @@ const MyAccount = () => {
             style={styles.avatar}
             source={{ uri: 'https://bootdey.com/img/Content/avatar/avatar6.png' }}
           />
-
           <Text style={styles.name}>Pratik Kshirsagar </Text>
-          <Text style={styles.userInfo}>pratik@mail.com </Text>
-          <Text style={styles.userInfo}>Airoli </Text>
+          <Text style={styles.userInfo}>pratik@gmail.com </Text>
+          <Text style={styles.userInfo}>Airoli</Text>
         </View>
       </View>
-
       <View style={styles.body}>
         <View style={{ marginTop: 25 }}>
           <View style={{ flexDirection: 'row' }}>
