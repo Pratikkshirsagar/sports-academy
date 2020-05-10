@@ -6,9 +6,13 @@ import {
   TextInput,
   TouchableOpacity,
   ActivityIndicator,
+  YellowBox,
 } from 'react-native';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/firestore';
+
+import _ from 'lodash';
 
 const LoginScreen = (props) => {
   const [email, setEmail] = useState('');
@@ -44,6 +48,22 @@ const LoginScreen = (props) => {
         const response = await firebase.auth().createUserWithEmailAndPassword(email, password);
         if (response) {
           setIsLoading(false);
+          YellowBox.ignoreWarnings(['Setting a timer']);
+          const _console = _.clone(console);
+          console.warn = (message) => {
+            if (message.indexOf('Setting a timer') <= -1) {
+              _console.warn(message);
+            }
+          };
+          const userRef = await firebase.firestore().doc(`users/${response.user.uid}`);
+          const snapShot = await userRef.get();
+          if (!snapShot.exists) {
+            const createdAt = new Date();
+            await userRef.set({
+              email: response.user.email,
+              createdAt,
+            });
+          }
           onSignIn(email, password);
         }
       } catch (err) {
