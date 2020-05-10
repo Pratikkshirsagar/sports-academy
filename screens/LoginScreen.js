@@ -17,13 +17,15 @@ const LoginScreen = (props) => {
 
   const onSignIn = async () => {
     if (email && password) {
+      setIsLoading(true);
       try {
         const response = await firebase.auth().signInWithEmailAndPassword(email, password);
         if (response) {
-          console.log(response);
+          setIsLoading(false);
           props.navigation.navigate('Home');
         }
       } catch (err) {
+        setIsLoading(false);
         switch (err.code) {
           case 'auth/user-not-found':
             alert('A user with that email does not exist. Try signing up');
@@ -37,12 +39,15 @@ const LoginScreen = (props) => {
   };
   const onSignUp = async () => {
     if (email && password) {
+      setIsLoading(true);
       try {
         const response = await firebase.auth().createUserWithEmailAndPassword(email, password);
         if (response) {
+          setIsLoading(false);
           onSignIn(email, password);
         }
       } catch (err) {
+        setIsLoading(false);
         alert(err.message);
       }
     }
@@ -50,6 +55,21 @@ const LoginScreen = (props) => {
 
   return (
     <View style={styles.container}>
+      {isLoading ? (
+        <View
+          style={[
+            StyleSheet.absoluteFill,
+            {
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 1000,
+              elevation: 1000,
+            },
+          ]}
+        >
+          <ActivityIndicator size="large" color="#ff6f00" />
+        </View>
+      ) : null}
       <View style={styles.inputView}>
         <TextInput
           style={styles.inputText}
