@@ -5,24 +5,55 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
 
 const LoginScreen = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onSignIn = () => {
-    props.navigation.navigate('Home');
+  const onSignIn = async () => {
+    if (email && password) {
+      try {
+        const response = await firebase.auth().signInWithEmailAndPassword(email, password);
+        if (response) {
+          console.log(response);
+          props.navigation.navigate('Home');
+        }
+      } catch (err) {
+        switch (err.code) {
+          case 'auth/user-not-found':
+            alert('A user with that email does not exist. Try signing up');
+          case 'auth/invalid-email':
+            alert('Please enter an email address');
+        }
+      }
+    } else {
+      alert('Please enter email and password');
+    }
   };
-  const onSignUp = () => {};
+  const onSignUp = async () => {
+    if (email && password) {
+      try {
+        const response = await firebase.auth().createUserWithEmailAndPassword(email, password);
+        if (response) {
+          onSignIn(email, password);
+        }
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.inputView}>
         <TextInput
           style={styles.inputText}
-          placeholder='Email...'
-          placeholderTextColor='#4a148c'
+          placeholder="Email..."
+          placeholderTextColor="#4a148c"
           onChangeText={(text) => setEmail(text)}
         />
       </View>
@@ -30,8 +61,8 @@ const LoginScreen = (props) => {
         <TextInput
           secureTextEntry
           style={styles.inputText}
-          placeholder='Password...'
-          placeholderTextColor='#4a148c'
+          placeholder="Password..."
+          placeholderTextColor="#4a148c"
           onChangeText={(text) => setPassword(text)}
         />
       </View>
@@ -41,7 +72,7 @@ const LoginScreen = (props) => {
       <TouchableOpacity style={styles.loginBtn} onPress={onSignIn}>
         <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={onSignUp}>
         <Text style={styles.signInText}>Signup</Text>
       </TouchableOpacity>
     </View>
