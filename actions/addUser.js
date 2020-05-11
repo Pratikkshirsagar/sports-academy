@@ -1,8 +1,9 @@
-export default (email) => {
+export default (id, email) => {
   return {
-    type: 'addUser',
+    type: 'AUTH_USER',
     payload: {
       email: email,
+      id: id,
     },
   };
 };

@@ -6,6 +6,12 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 import { SPORTS } from '../data/dummy-data';
 
+import { firestore } from '../config/config';
+
+import uuid from 'uuid-random';
+
+import { connect } from 'react-redux';
+
 function SportDetailScreen(props) {
   const catId = props.navigation.getParam('catRefId');
   const sportId = props.navigation.getParam('sportId');
@@ -89,6 +95,56 @@ function SportDetailScreen(props) {
     setDisplayTime(time);
   };
 
+  const checkUnique = async (ticket) => {
+    try {
+      const snapshot = await firestore.collection('booking').get();
+      const doc = snapshot.docs.filter((doc) => {
+        const docData = doc.data();
+        return docData.bookingId === ticket;
+      });
+      if (doc.length >= 1) return true;
+
+      return false;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const addbooking = async () => {
+    const ticketData = [
+      catId,
+      sportId,
+      ...displayTime,
+      ...displayBookingShedule,
+      ...displatBookingDate,
+    ];
+    const ticket = ticketData.toString().split(' ').join('').replace(/,/g, '');
+    try {
+      const unique = await checkUnique(ticket);
+      if (unique === false) {
+        const id = uuid();
+        const createdAt = new Date();
+        await firestore.doc(`booking/${id}`).set({
+          bookingId: ticket,
+          createdAt,
+          time: displayTime,
+          shedule: displayBookingShedule,
+          date: displatBookingDate,
+          userEmail: props.user.email,
+          userId: props.user.id,
+        });
+
+        props.navigation.navigate({
+          routeName: 'BookingConfirm',
+        });
+      } else {
+        alert('This slot is allready booked');
+      }
+    } catch (err) {
+      alert(err);
+    }
+  };
+
   return (
     <ScrollView>
       <Image source={{ uri: selectedSport.imageUrl }} style={styles.image} />
@@ -146,11 +202,10 @@ function SportDetailScreen(props) {
         ></View>
         <TouchableOpacity
           style={styles.bookingBtn}
-          onPress={() =>
-            props.navigation.navigate({
-              routeName: 'BookingConfirm',
-            })
-          }
+          // onPress={() =>
+
+          // }
+          onPress={addbooking}
         >
           <Text style={styles.bookingText}>Confirm Booking</Text>
         </TouchableOpacity>
@@ -216,4 +271,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SportDetailScreen;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(SportDetailScreen);

@@ -24,6 +24,7 @@ const LoginScreen = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [id, setId] = useState('');
 
   const onSignIn = async () => {
     if (email && password) {
@@ -32,6 +33,7 @@ const LoginScreen = (props) => {
         // const response = await firebase.auth().signInWithEmailAndPassword(email, password);
         const response = await auth.signInWithEmailAndPassword(email, password);
         if (response) {
+          props.addUser(response.user.uid, email);
           setIsLoading(false);
           props.navigation.navigate('Home');
         }
@@ -55,6 +57,7 @@ const LoginScreen = (props) => {
         const response = await auth.createUserWithEmailAndPassword(email, password);
         if (response) {
           setIsLoading(false);
+          setId(response.user.uid);
           YellowBox.ignoreWarnings(['Setting a timer']);
           const _console = _.clone(console);
           console.warn = (message) => {
@@ -67,11 +70,12 @@ const LoginScreen = (props) => {
           if (!snapShot.exists) {
             const createdAt = new Date();
             await userRef.set({
+              id: response.user.uid,
               email: response.user.email,
               createdAt,
             });
           }
-          props.addUser(email);
+
           onSignIn(email, password);
         }
       } catch (err) {
