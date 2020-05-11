@@ -5,11 +5,13 @@ import { AppLoading } from 'expo';
 import { enableScreens } from 'react-native-screens';
 
 import AppSwitchNavigater from './navigation/ScreensNavigation';
-import * as firebase from 'firebase/app';
-import firebaseConfig from './config/config';
-// firebase init
-firebase.initializeApp(firebaseConfig);
 
+// redux
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import rootReducer from './reducers/rootReducer';
+
+const theStore = createStore(rootReducer);
 enableScreens();
 
 const fetchFonts = () => {
@@ -26,7 +28,11 @@ export default function App() {
     return <AppLoading startAsync={fetchFonts} onFinish={() => setFontLoaded(true)} />;
   }
 
-  return <AppSwitchNavigater />;
+  return (
+    <Provider store={theStore}>
+      <AppSwitchNavigater />
+    </Provider>
+  );
 }
 
 const styles = StyleSheet.create({

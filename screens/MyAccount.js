@@ -4,13 +4,14 @@ import { Entypo } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
-import firebase from 'firebase/app';
-import 'firebase/auth';
+import { connect } from 'react-redux';
+
+import { auth } from '../config/config';
 
 const MyAccount = (props) => {
   const signOut = async () => {
     try {
-      await firebase.auth().signOut();
+      await auth.signOut();
       props.navigation.navigate('WelcomeScreen');
     } catch (err) {
       alert('Unable to sign out');
@@ -24,9 +25,8 @@ const MyAccount = (props) => {
             style={styles.avatar}
             source={{ uri: 'https://bootdey.com/img/Content/avatar/avatar6.png' }}
           />
-          <Text style={styles.name}>Pratik Kshirsagar </Text>
-          <Text style={styles.userInfo}>pratik@gmail.com </Text>
-          <Text style={styles.userInfo}>Airoli</Text>
+
+          <Text style={styles.userInfo}>{props.user.email}</Text>
         </View>
       </View>
       <View style={styles.body}>
@@ -138,4 +138,11 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
 });
-export default MyAccount;
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(MyAccount);

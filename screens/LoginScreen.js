@@ -8,11 +8,17 @@ import {
   ActivityIndicator,
   YellowBox,
 } from 'react-native';
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
+import addUser from '../actions/addUser';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import _ from 'lodash';
+
+import { auth, firestore } from '../config/config';
+
+// import firebase from 'firebase';
+// import 'firebase/auth';
+// import 'firebase/firestore';
 
 const LoginScreen = (props) => {
   const [email, setEmail] = useState('');
@@ -23,7 +29,8 @@ const LoginScreen = (props) => {
     if (email && password) {
       setIsLoading(true);
       try {
-        const response = await firebase.auth().signInWithEmailAndPassword(email, password);
+        // const response = await firebase.auth().signInWithEmailAndPassword(email, password);
+        const response = await auth.signInWithEmailAndPassword(email, password);
         if (response) {
           setIsLoading(false);
           props.navigation.navigate('Home');
@@ -45,7 +52,7 @@ const LoginScreen = (props) => {
     if (email && password) {
       setIsLoading(true);
       try {
-        const response = await firebase.auth().createUserWithEmailAndPassword(email, password);
+        const response = await auth.createUserWithEmailAndPassword(email, password);
         if (response) {
           setIsLoading(false);
           YellowBox.ignoreWarnings(['Setting a timer']);
@@ -55,7 +62,7 @@ const LoginScreen = (props) => {
               _console.warn(message);
             }
           };
-          const userRef = await firebase.firestore().doc(`users/${response.user.uid}`);
+          const userRef = await firestore.doc(`users/${response.user.uid}`);
           const snapShot = await userRef.get();
           if (!snapShot.exists) {
             const createdAt = new Date();
@@ -64,6 +71,7 @@ const LoginScreen = (props) => {
               createdAt,
             });
           }
+          props.addUser(email);
           onSignIn(email, password);
         }
       } catch (err) {
@@ -113,7 +121,7 @@ const LoginScreen = (props) => {
       <TouchableOpacity style={styles.loginBtn} onPress={onSignIn}>
         <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={onSignUp}>
+      <TouchableOpacity onPress={() => onSignUp()}>
         <Text style={styles.signInText}>Signup</Text>
       </TouchableOpacity>
     </View>
@@ -174,4 +182,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
-export default LoginScreen;
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      addUser: addUser,
+    },
+    dispatch
+  );
+};
+
+export default connect(null, mapDispatchToProps)(LoginScreen);
