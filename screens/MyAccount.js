@@ -4,7 +4,18 @@ import { Entypo } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
+import firebase from 'firebase/app';
+import 'firebase/auth';
+
 const MyAccount = (props) => {
+  const signOut = async () => {
+    try {
+      await firebase.auth().signOut();
+      props.navigation.navigate('WelcomeScreen');
+    } catch (err) {
+      alert('Unable to sign out');
+    }
+  };
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -61,7 +72,7 @@ const MyAccount = (props) => {
               <AntDesign name="poweroff" size={23} color="white" />
             </View>
             <View>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={signOut}>
                 <Text style={{ color: 'white', fontSize: 20, fontFamily: 'open-sans-bold' }}>
                   Logout
                 </Text>
