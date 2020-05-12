@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 function SportDetailScreen(props) {
   const catId = props.navigation.getParam('catRefId');
   const sportId = props.navigation.getParam('sportId');
+
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [displatBookingDate, setDisplayBookingDate] = useState('');
   const showDatePicker = () => {
@@ -103,7 +104,6 @@ function SportDetailScreen(props) {
         return docData.bookingId === ticket;
       });
       if (doc.length >= 1) return true;
-
       return false;
     } catch (err) {
       console.log(err);
@@ -114,6 +114,7 @@ function SportDetailScreen(props) {
     const ticketData = [
       catId,
       sportId,
+      selectedSport.title,
       ...displayTime,
       ...displayBookingShedule,
       ...displatBookingDate,
@@ -126,12 +127,14 @@ function SportDetailScreen(props) {
         const createdAt = new Date();
         await firestore.doc(`booking/${id}`).set({
           bookingId: ticket,
+          title: selectedSport.title,
           createdAt,
           time: displayTime,
           shedule: displayBookingShedule,
           date: displatBookingDate,
           userEmail: props.user.email,
           userId: props.user.id,
+          type: selectedSport.type,
         });
 
         props.navigation.navigate({

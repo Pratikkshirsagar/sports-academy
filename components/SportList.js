@@ -8,7 +8,7 @@ const SportList = (props) => {
     return (
       <SportItem
         title={itemData.item.title}
-        location={itemData.item.location[0]}
+        location={itemData.item.location}
         affordability={itemData.item.affordability}
         image={itemData.item.imageUrl}
         onSelectSport={() => {
