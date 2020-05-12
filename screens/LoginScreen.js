@@ -30,7 +30,6 @@ const LoginScreen = (props) => {
     if (email && password) {
       setIsLoading(true);
       try {
-        // const response = await firebase.auth().signInWithEmailAndPassword(email, password);
         const response = await auth.signInWithEmailAndPassword(email, password);
         if (response) {
           props.addUser(response.user.uid, email);
@@ -39,6 +38,7 @@ const LoginScreen = (props) => {
         }
       } catch (err) {
         setIsLoading(false);
+
         switch (err.code) {
           case 'auth/user-not-found':
             alert('A user with that email does not exist. Try signing up');
@@ -65,7 +65,7 @@ const LoginScreen = (props) => {
               _console.warn(message);
             }
           };
-          const userRef = await firestore.doc(`users/${response.user.uid}`);
+          const userRef = firestore.doc(`users/${response.user.uid}`);
           const snapShot = await userRef.get();
           if (!snapShot.exists) {
             const createdAt = new Date();
