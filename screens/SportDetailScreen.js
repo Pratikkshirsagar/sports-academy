@@ -32,11 +32,13 @@ function SportDetailScreen(props) {
   const [show, setShow] = useState(false);
   const [displatBookingDate, setDisplayBookingDate] = useState(''); // display date to database
   const [isLoading, setIsLoading] = useState(false);
+
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
     setDisplayBookingDate(currentDate.toDateString());
   };
+
   const showMode = (currentMode) => {
     setShow(true);
     setMode(currentMode);
@@ -134,6 +136,11 @@ function SportDetailScreen(props) {
 
   const addbooking = async () => {
     setIsLoading(true);
+    if (displayTime.length < 1 && displayBookingShedule.length < 1 && displatBookingDate < 1) {
+      setIsLoading(false);
+      return alert('Please select time and shedule');
+    }
+
     const ticketData = [
       catId,
       sportId,

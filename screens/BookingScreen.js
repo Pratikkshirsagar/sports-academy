@@ -1,35 +1,48 @@
-import React, { useEffect } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Text, View, StyleSheet, FlatList, Item } from 'react-native';
 import { connect } from 'react-redux';
 
 import { firestore } from '../config/config';
 
 const BookingScreen = (props) => {
+  const [bookingList, setBookingList] = useState([]);
+
   const getBookingHistory = async () => {
     const snapshot = await firestore.collection('booking').get();
     const docs = snapshot.docs.filter((doc) => {
-      // const bookingList = [];
-      // const data = doc.data();
-      // if (data.userId === props.user.id) {
-      //   bookingList.push(data);
-      // }
-
-      // return bookingList;
       if (doc.data().userId === props.user.id) return doc;
     });
 
+    bookingHistoryList = [];
     docs.forEach((el) => {
-      console.log(el.data());
+      bookingHistoryList.push(el.data());
     });
+    setBookingList(bookingHistoryList);
   };
 
   useEffect(() => {
     getBookingHistory();
   }, []);
 
+  const renderBooking = ({ item }) => {
+    return (
+      <View>
+        <Text>{item.bookingId}</Text>
+        <Text>{item.date}</Text>
+        <Text>{item.time}</Text>
+        <Text>{item.shedule}</Text>
+        <Text>{item.title}</Text>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
-      <Text>{}</Text>
+      <FlatList
+        data={bookingList}
+        renderItem={renderBooking}
+        keyExtractor={(item) => item.userId}
+      />
     </View>
   );
 };
@@ -37,8 +50,6 @@ const BookingScreen = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 
