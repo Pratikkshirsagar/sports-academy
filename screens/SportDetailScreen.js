@@ -136,6 +136,11 @@ function SportDetailScreen(props) {
 
   const addbooking = async () => {
     setIsLoading(true);
+    if (displayTime.length < 1 && displayBookingShedule.length < 1 && displatBookingDate < 1) {
+      setIsLoading(false);
+      return alert('Please select time and shedule');
+    }
+
     const ticketData = [
       catId,
       sportId,
