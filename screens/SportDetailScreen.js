@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  Platform,
+} from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
 import { AntDesign } from '@expo/vector-icons';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import { SPORTS } from '../data/dummy-data';
 
@@ -16,19 +24,24 @@ function SportDetailScreen(props) {
   const catId = props.navigation.getParam('catRefId');
   const sportId = props.navigation.getParam('sportId');
 
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [displatBookingDate, setDisplayBookingDate] = useState('');
+  const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+  const [displatBookingDate, setDisplayBookingDate] = useState(''); // display date to database
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    console.log(currentDate.toDateString());
+    setShow(Platform.OS === 'ios');
+    setDisplayBookingDate(currentDate.toDateString());
+  };
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
   const showDatePicker = () => {
-    setDatePickerVisibility(true);
-  };
-
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  };
-
-  const handleConfirm = (date) => {
-    setDisplayBookingDate(date.toDateString());
-    hideDatePicker();
+    showMode('date');
   };
 
   const selectedCat = SPORTS[catId];
@@ -141,7 +154,7 @@ function SportDetailScreen(props) {
           routeName: 'BookingConfirm',
         });
       } else {
-        alert('This slot is allready booked');
+        alert('This slot is already booked');
       }
     } catch (err) {
       alert(err);
@@ -184,12 +197,23 @@ function SportDetailScreen(props) {
           <Text style={{ fontSize: 16, fontFamily: 'open-sans-bold' }}>Select Date</Text>
           <View style={{ marginTop: 20, paddingLeft: 30 }}>
             <AntDesign name="calendar" size={35} color="#4a148c" onPress={showDatePicker} />
-            <DateTimePickerModal
+            {show && (
+              <DateTimePicker
+                testID="dateTimePicker"
+                timeZoneOffsetInMinutes={0}
+                value={date}
+                mode={mode}
+                is24Hour={true}
+                display="default"
+                onChange={onChange}
+              />
+            )}
+            {/* <DateTimePickerModal
               isVisible={isDatePickerVisible}
               mode="date"
               onConfirm={handleConfirm}
               onCancel={hideDatePicker}
-            />
+            /> */}
           </View>
         </View>
       </View>
