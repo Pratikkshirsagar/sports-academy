@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Text,
   View,
@@ -6,6 +6,7 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  ActivityIndicator,
   Platform,
 } from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
@@ -20,6 +21,8 @@ import uuid from 'uuid-random';
 
 import { connect } from 'react-redux';
 
+import { YellowBox } from 'react-native';
+
 function SportDetailScreen(props) {
   const catId = props.navigation.getParam('catRefId');
   const sportId = props.navigation.getParam('sportId');
@@ -28,10 +31,9 @@ function SportDetailScreen(props) {
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
   const [displatBookingDate, setDisplayBookingDate] = useState(''); // display date to database
-
+  const [isLoading, setIsLoading] = useState(false);
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
-    console.log(currentDate.toDateString());
     setShow(Platform.OS === 'ios');
     setDisplayBookingDate(currentDate.toDateString());
   };
@@ -60,32 +62,38 @@ function SportDetailScreen(props) {
     },
   ];
   let time = [];
+  let morning = [];
+  let afternoon = [];
+  let evening = [];
 
-  let morning = [
-    { value: '7:00AM' },
-    { value: '8:00AM' },
-    { value: '9:00AM' },
-    { value: '10:00AM' },
-    { value: '11:00AM' },
-  ];
+  useEffect(() => {
+    morning = [
+      { value: '7:00AM' },
+      { value: '8:00AM' },
+      { value: '9:00AM' },
+      { value: '10:00AM' },
+      { value: '11:00AM' },
+    ];
 
-  let afternoon = [
-    { value: '12:00PM' },
-    { value: '1:00PM' },
-    { value: '2:00PM' },
-    { value: '3:00PM' },
-    { value: '4:00PM' },
-    { value: '5:00PM' },
-  ];
+    afternoon = [
+      { value: '12:00PM' },
+      { value: '1:00PM' },
+      { value: '2:00PM' },
+      { value: '3:00PM' },
+      { value: '4:00PM' },
+      { value: '5:00PM' },
+    ];
 
-  let evening = [
-    { value: '5:00PM' },
-    { value: '7:00PM' },
-    { value: '8:00PM' },
-    { value: '9:00PM' },
-    { value: '10:00PM' },
-    { value: '11:00PM' },
-  ];
+    evening = [
+      { value: '5:00PM' },
+      { value: '7:00PM' },
+      { value: '8:00PM' },
+      { value: '9:00PM' },
+      { value: '10:00PM' },
+      { value: '11:00PM' },
+    ];
+    YellowBox.ignoreWarnings(['Setting a timer']);
+  }, []);
 
   const [timing, setTiming] = useState([]);
   const [displayBookingShedule, setDisplayBookingShedule] = useState('');
@@ -124,6 +132,7 @@ function SportDetailScreen(props) {
   };
 
   const addbooking = async () => {
+    setIsLoading(true);
     const ticketData = [
       catId,
       sportId,
@@ -149,14 +158,16 @@ function SportDetailScreen(props) {
           userId: props.user.id,
           type: selectedSport.type,
         });
-
+        setIsLoading(false);
         props.navigation.navigate({
           routeName: 'BookingConfirm',
         });
       } else {
+        setIsLoading(false);
         alert('This slot is already booked');
       }
     } catch (err) {
+      setIsLoading(false);
       alert(err);
     }
   };
@@ -181,6 +192,21 @@ function SportDetailScreen(props) {
           />
         </View>
         <View>
+          {isLoading ? (
+            <View
+              style={[
+                StyleSheet.absoluteFill,
+                {
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  zIndex: 1000,
+                  elevation: 1000,
+                },
+              ]}
+            >
+              <ActivityIndicator size="large" color="#ff6f00" />
+            </View>
+          ) : null}
           <Text style={{ fontSize: 16, fontFamily: 'open-sans-bold' }}>Select Time</Text>
           <Dropdown
             dropdownMargins={{ min: 16, max: 20 }}
@@ -208,12 +234,6 @@ function SportDetailScreen(props) {
                 onChange={onChange}
               />
             )}
-            {/* <DateTimePickerModal
-              isVisible={isDatePickerVisible}
-              mode="date"
-              onConfirm={handleConfirm}
-              onCancel={hideDatePicker}
-            /> */}
           </View>
         </View>
       </View>
@@ -227,13 +247,7 @@ function SportDetailScreen(props) {
             marginRight: 18,
           }}
         ></View>
-        <TouchableOpacity
-          style={styles.bookingBtn}
-          // onPress={() =>
-
-          // }
-          onPress={addbooking}
-        >
+        <TouchableOpacity style={styles.bookingBtn} onPress={addbooking}>
           <Text style={styles.bookingText}>Confirm Booking</Text>
         </TouchableOpacity>
       </View>
