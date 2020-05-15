@@ -93,6 +93,7 @@ function SportDetailScreen(props) {
       { value: '11:00PM' },
     ];
     YellowBox.ignoreWarnings(['Setting a timer']);
+    console.disableYellowBox = true;
   }, []);
 
   const [timing, setTiming] = useState([]);
