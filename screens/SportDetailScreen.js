@@ -6,6 +6,7 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  ActivityIndicator,
   Platform,
 } from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
@@ -30,7 +31,7 @@ function SportDetailScreen(props) {
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
   const [displatBookingDate, setDisplayBookingDate] = useState(''); // display date to database
-
+  const [isLoading, setIsLoading] = useState(false);
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
@@ -131,6 +132,7 @@ function SportDetailScreen(props) {
   };
 
   const addbooking = async () => {
+    setIsLoading(true);
     const ticketData = [
       catId,
       sportId,
@@ -156,14 +158,16 @@ function SportDetailScreen(props) {
           userId: props.user.id,
           type: selectedSport.type,
         });
-
+        setIsLoading(false);
         props.navigation.navigate({
           routeName: 'BookingConfirm',
         });
       } else {
+        setIsLoading(false);
         alert('This slot is already booked');
       }
     } catch (err) {
+      setIsLoading(false);
       alert(err);
     }
   };
@@ -188,6 +192,21 @@ function SportDetailScreen(props) {
           />
         </View>
         <View>
+          {isLoading ? (
+            <View
+              style={[
+                StyleSheet.absoluteFill,
+                {
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  zIndex: 1000,
+                  elevation: 1000,
+                },
+              ]}
+            >
+              <ActivityIndicator size="large" color="#ff6f00" />
+            </View>
+          ) : null}
           <Text style={{ fontSize: 16, fontFamily: 'open-sans-bold' }}>Select Time</Text>
           <Dropdown
             dropdownMargins={{ min: 16, max: 20 }}
@@ -215,12 +234,6 @@ function SportDetailScreen(props) {
                 onChange={onChange}
               />
             )}
-            {/* <DateTimePickerModal
-              isVisible={isDatePickerVisible}
-              mode="date"
-              onConfirm={handleConfirm}
-              onCancel={hideDatePicker}
-            /> */}
           </View>
         </View>
       </View>
@@ -234,13 +247,7 @@ function SportDetailScreen(props) {
             marginRight: 18,
           }}
         ></View>
-        <TouchableOpacity
-          style={styles.bookingBtn}
-          // onPress={() =>
-
-          // }
-          onPress={addbooking}
-        >
+        <TouchableOpacity style={styles.bookingBtn} onPress={addbooking}>
           <Text style={styles.bookingText}>Confirm Booking</Text>
         </TouchableOpacity>
       </View>
