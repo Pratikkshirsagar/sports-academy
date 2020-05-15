@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Text,
   View,
@@ -31,7 +31,6 @@ function SportDetailScreen(props) {
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
-    console.log(currentDate.toDateString());
     setShow(Platform.OS === 'ios');
     setDisplayBookingDate(currentDate.toDateString());
   };
@@ -60,32 +59,37 @@ function SportDetailScreen(props) {
     },
   ];
   let time = [];
+  let morning = [];
+  let afternoon = [];
+  let evening = [];
 
-  let morning = [
-    { value: '7:00AM' },
-    { value: '8:00AM' },
-    { value: '9:00AM' },
-    { value: '10:00AM' },
-    { value: '11:00AM' },
-  ];
+  useEffect(() => {
+    morning = [
+      { value: '7:00AM' },
+      { value: '8:00AM' },
+      { value: '9:00AM' },
+      { value: '10:00AM' },
+      { value: '11:00AM' },
+    ];
 
-  let afternoon = [
-    { value: '12:00PM' },
-    { value: '1:00PM' },
-    { value: '2:00PM' },
-    { value: '3:00PM' },
-    { value: '4:00PM' },
-    { value: '5:00PM' },
-  ];
+    afternoon = [
+      { value: '12:00PM' },
+      { value: '1:00PM' },
+      { value: '2:00PM' },
+      { value: '3:00PM' },
+      { value: '4:00PM' },
+      { value: '5:00PM' },
+    ];
 
-  let evening = [
-    { value: '5:00PM' },
-    { value: '7:00PM' },
-    { value: '8:00PM' },
-    { value: '9:00PM' },
-    { value: '10:00PM' },
-    { value: '11:00PM' },
-  ];
+    evening = [
+      { value: '5:00PM' },
+      { value: '7:00PM' },
+      { value: '8:00PM' },
+      { value: '9:00PM' },
+      { value: '10:00PM' },
+      { value: '11:00PM' },
+    ];
+  }, []);
 
   const [timing, setTiming] = useState([]);
   const [displayBookingShedule, setDisplayBookingShedule] = useState('');
