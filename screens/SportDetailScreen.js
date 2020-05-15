@@ -20,6 +20,8 @@ import uuid from 'uuid-random';
 
 import { connect } from 'react-redux';
 
+import { YellowBox } from 'react-native';
+
 function SportDetailScreen(props) {
   const catId = props.navigation.getParam('catRefId');
   const sportId = props.navigation.getParam('sportId');
@@ -89,6 +91,7 @@ function SportDetailScreen(props) {
       { value: '10:00PM' },
       { value: '11:00PM' },
     ];
+    YellowBox.ignoreWarnings(['Setting a timer']);
   }, []);
 
   const [timing, setTiming] = useState([]);
