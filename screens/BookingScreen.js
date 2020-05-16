@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet, FlatList, Item } from 'react-native';
+import { Text, View, StyleSheet, FlatList, Item, Button } from 'react-native';
 import { connect } from 'react-redux';
 
 import { firestore } from '../config/config';
+import { Card } from 'react-native-shadow-cards';
 
 const BookingScreen = (props) => {
   const [bookingList, setBookingList] = useState([]);
@@ -22,16 +23,34 @@ const BookingScreen = (props) => {
 
   useEffect(() => {
     getBookingHistory();
-  }, []);
+  }, [bookingList]);
 
   const renderBooking = ({ item }) => {
     return (
-      <View>
-        <Text>{item.bookingId}</Text>
-        <Text>{item.date}</Text>
-        <Text>{item.time}</Text>
-        <Text>{item.shedule}</Text>
-        <Text>{item.title}</Text>
+      <View style={{ marginLeft: 10 }}>
+        <Card style={{ padding: 15, margin: 12 }}>
+          <Text style={{ fontSize: 20, fontFamily: 'open-sans-bold', color: '#4a148c' }}>
+            ORDER NO: 31346
+          </Text>
+          <Text style={styles.text}>
+            Sport : <Text style={{ fontFamily: 'open-sans-bold' }}> {item.type}</Text>
+          </Text>
+          <Text style={styles.text}>Place : {item.title} </Text>
+          <Text style={styles.text}>
+            Timing: {item.shedule} At {item.time}
+          </Text>
+
+          <Card style={{ width: '50%', padding: 4, marginTop: 10 }}>
+            <Button
+              style={{ fontFamily: 'open-sans-bold', fontSize: 20 }}
+              onPress={() => {
+                console.log('Work');
+              }}
+              title="Cancel Booking"
+              color="#ff6f00"
+            />
+          </Card>
+        </Card>
       </View>
     );
   };
@@ -41,7 +60,7 @@ const BookingScreen = (props) => {
       <FlatList
         data={bookingList}
         renderItem={renderBooking}
-        keyExtractor={(item) => item.userId}
+        keyExtractor={(item) => `${item.userId}${item.bookingId}`}
       />
     </View>
   );
@@ -50,6 +69,10 @@ const BookingScreen = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  text: {
+    marginTop: 7,
+    fontFamily: 'open-sans',
   },
 });
 
