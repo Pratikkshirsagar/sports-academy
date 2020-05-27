@@ -55,7 +55,7 @@ const MyAccount = (props) => {
         </View>
       </View>
       <View style={styles.body}>
-        <View style={{ marginTop: 25 }}>
+        <View style={{ marginTop: 35 }}>
           <View style={{ flexDirection: 'row' }}>
             <View style={{ marginRight: 10 }}>
               <Entypo name="home" size={25} color="white" />
@@ -76,7 +76,7 @@ const MyAccount = (props) => {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={{ flexDirection: 'row', marginTop: 30 }}>
+          <View style={{ flexDirection: 'row', marginTop: 35 }}>
             <View style={{ marginRight: 12 }}>
               <Feather name="settings" size={25} color="white" />
             </View>
@@ -94,7 +94,7 @@ const MyAccount = (props) => {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={{ flexDirection: 'row', marginTop: 30 }}>
+          <View style={{ flexDirection: 'row', marginTop: 35 }}>
             <View style={{ marginRight: 10 }}>
               <Entypo name="open-book" size={25} color="white" />
             </View>
@@ -114,7 +114,7 @@ const MyAccount = (props) => {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={{ flexDirection: 'row', marginTop: 30 }}>
+          <View style={{ flexDirection: 'row', marginTop: 35 }}>
             <View style={{ marginRight: 10 }}>
               <AntDesign name="poweroff" size={23} color="white" />
             </View>
