@@ -1,5 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
@@ -9,6 +16,22 @@ import { connect } from 'react-redux';
 import { auth } from '../config/config';
 
 const MyAccount = (props) => {
+  const button = () => {
+    Alert.alert('Logout', 'Are you sure you want to Logout? ', [
+      {
+        text: 'NO',
+        onPress: () => {
+          console.log('CANCEL');
+        },
+      },
+      {
+        text: 'YES',
+        onPress: () => {
+          signOut();
+        },
+      },
+    ]);
+  };
   const signOut = async () => {
     try {
       await auth.signOut();
@@ -23,7 +46,9 @@ const MyAccount = (props) => {
         <View style={styles.headerContent}>
           <Image
             style={styles.avatar}
-            source={{ uri: 'https://bootdey.com/img/Content/avatar/avatar6.png' }}
+            source={{
+              uri: 'https://bootdey.com/img/Content/avatar/avatar6.png',
+            }}
           />
 
           <Text style={styles.userInfo}>{props.user.email}</Text>
@@ -36,8 +61,16 @@ const MyAccount = (props) => {
               <Entypo name="home" size={25} color="white" />
             </View>
             <View>
-              <TouchableOpacity onPress={() => props.navigation.navigate('Home')}>
-                <Text style={{ color: 'white', fontSize: 20, fontFamily: 'open-sans-bold' }}>
+              <TouchableOpacity
+                onPress={() => props.navigation.navigate('Home')}
+              >
+                <Text
+                  style={{
+                    color: 'white',
+                    fontSize: 20,
+                    fontFamily: 'open-sans-bold',
+                  }}
+                >
                   Home
                 </Text>
               </TouchableOpacity>
@@ -49,7 +82,13 @@ const MyAccount = (props) => {
             </View>
             <View>
               <TouchableOpacity>
-                <Text style={{ color: 'white', fontSize: 20, fontFamily: 'open-sans-bold' }}>
+                <Text
+                  style={{
+                    color: 'white',
+                    fontSize: 20,
+                    fontFamily: 'open-sans-bold',
+                  }}
+                >
                   Setting
                 </Text>
               </TouchableOpacity>
@@ -60,8 +99,16 @@ const MyAccount = (props) => {
               <Entypo name="open-book" size={25} color="white" />
             </View>
             <View>
-              <TouchableOpacity onPress={() => props.navigation.navigate('Booking')}>
-                <Text style={{ color: 'white', fontSize: 20, fontFamily: 'open-sans-bold' }}>
+              <TouchableOpacity
+                onPress={() => props.navigation.navigate('Booking')}
+              >
+                <Text
+                  style={{
+                    color: 'white',
+                    fontSize: 20,
+                    fontFamily: 'open-sans-bold',
+                  }}
+                >
                   Booking
                 </Text>
               </TouchableOpacity>
@@ -72,8 +119,14 @@ const MyAccount = (props) => {
               <AntDesign name="poweroff" size={23} color="white" />
             </View>
             <View>
-              <TouchableOpacity onPress={signOut}>
-                <Text style={{ color: 'white', fontSize: 20, fontFamily: 'open-sans-bold' }}>
+              <TouchableOpacity onPress={button}>
+                <Text
+                  style={{
+                    color: 'white',
+                    fontSize: 20,
+                    fontFamily: 'open-sans-bold',
+                  }}
+                >
                   Logout
                 </Text>
               </TouchableOpacity>
