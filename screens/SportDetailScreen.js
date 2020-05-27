@@ -32,6 +32,7 @@ function SportDetailScreen(props) {
   const [show, setShow] = useState(false);
   const [displatBookingDate, setDisplayBookingDate] = useState(''); // display date to database
   const [isLoading, setIsLoading] = useState(false);
+
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
@@ -132,9 +133,29 @@ function SportDetailScreen(props) {
     }
   };
 
+  const generatedOrderId = () => {
+    const numbers = '1234567890';
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const symbols = '!@#$%^&*()';
+    let validChars = numbers + letters + symbols;
+
+    let generatedOrderId = '';
+
+    for (let i = 0; i < 5; i++) {
+      const index = Math.floor(Math.random() * validChars.length);
+      generatedOrderId += validChars[index];
+    }
+
+    return generatedOrderId;
+  };
+
   const addbooking = async () => {
     setIsLoading(true);
-    if (displayTime.length < 1 || displayBookingShedule.length < 1 || displatBookingDate < 1) {
+    if (
+      displayTime.length < 1 ||
+      displayBookingShedule.length < 1 ||
+      displatBookingDate < 1
+    ) {
       setIsLoading(false);
       return alert('Please select time and shedule');
     }
@@ -152,9 +173,12 @@ function SportDetailScreen(props) {
       const unique = await checkUnique(ticket);
       if (unique === false) {
         const id = uuid();
+        let orderId = generatedOrderId();
+
         const createdAt = new Date();
         await firestore.doc(`booking/${id}`).set({
           bookingId: ticket,
+          orderId,
           title: selectedSport.title,
           createdAt,
           time: displayTime,
@@ -182,9 +206,17 @@ function SportDetailScreen(props) {
     <ScrollView>
       <Image source={{ uri: selectedSport.imageUrl }} style={styles.image} />
       <View style={{ ...styles.sportRow, ...styles.sportDetail }}></View>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 20 }}>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          marginTop: 20,
+        }}
+      >
         <View>
-          <Text style={{ fontSize: 15, fontFamily: 'open-sans-bold' }}>Select schedule</Text>
+          <Text style={{ fontSize: 15, fontFamily: 'open-sans-bold' }}>
+            Select schedule
+          </Text>
           <Dropdown
             dropdownMargins={{ min: 16, max: 20 }}
             itemPadding={10}
@@ -213,7 +245,9 @@ function SportDetailScreen(props) {
               <ActivityIndicator size="large" color="#ff6f00" />
             </View>
           ) : null}
-          <Text style={{ fontSize: 16, fontFamily: 'open-sans-bold' }}>Select Time</Text>
+          <Text style={{ fontSize: 16, fontFamily: 'open-sans-bold' }}>
+            Select Time
+          </Text>
           <Dropdown
             dropdownMargins={{ min: 16, max: 20 }}
             itemPadding={10}
@@ -226,9 +260,16 @@ function SportDetailScreen(props) {
           />
         </View>
         <View style={{ alignItems: 'baseline' }}>
-          <Text style={{ fontSize: 16, fontFamily: 'open-sans-bold' }}>Select Date</Text>
+          <Text style={{ fontSize: 16, fontFamily: 'open-sans-bold' }}>
+            Select Date
+          </Text>
           <View style={{ marginTop: 20, paddingLeft: 30 }}>
-            <AntDesign name="calendar" size={35} color="#4a148c" onPress={showDatePicker} />
+            <AntDesign
+              name="calendar"
+              size={35}
+              color="#4a148c"
+              onPress={showDatePicker}
+            />
             {show && (
               <DateTimePicker
                 testID="dateTimePicker"

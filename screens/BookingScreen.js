@@ -39,17 +39,17 @@ const BookingScreen = (props) => {
               color: '#4a148c',
             }}
           >
-            ORDER NO: 31346
+            ORDER NO: {item.orderId}
           </Text>
           <Text style={styles.text}>
-            Sport :{' '}
+            Sport :
             <Text style={{ fontFamily: 'open-sans-bold' }}> {item.type}</Text>
           </Text>
           <Text style={styles.text}>Place : {item.title} </Text>
+          <Text style={styles.text}>Date: {item.date}</Text>
           <Text style={styles.text}>
             Timing: {item.shedule} At {item.time}
           </Text>
-
           <Card style={{ width: '50%', padding: 4, marginTop: 10 }}>
             <Button
               style={{ fontFamily: 'open-sans-bold', fontSize: 20 }}
