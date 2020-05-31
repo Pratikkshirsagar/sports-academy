@@ -7,6 +7,7 @@ import {
   Item,
   Button,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -16,6 +17,8 @@ import { Card } from 'react-native-shadow-cards';
 const BookingScreen = (props) => {
   const [bookingList, setBookingList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isScoreling, setIsScoreling] = useState(false);
+  const [listUpdated, setListUpdated] = useState(false);
 
   const buttonPress = (id) => {
     Alert.alert('Cancel Booking', 'Are you sure want to cancle booking', [
@@ -29,15 +32,17 @@ const BookingScreen = (props) => {
         text: 'Yes',
         onPress: async () => {
           try {
+            setIsScoreling(true);
             const bookingRef = firestore.collection('booking');
             let snapshot = await bookingRef.where('bookingId', '==', id).get();
             if (snapshot.empty) {
               alert('Booking not found');
             }
-            let refDoc;
             snapshot.forEach((doc) => {
               doc.ref.delete();
             });
+            setIsScoreling(false);
+            alert('Booking is Cancel Successfully please refresh the screen');
           } catch (err) {
             console.log(err);
           }
@@ -57,6 +62,7 @@ const BookingScreen = (props) => {
     docs.forEach((el) => {
       bookingHistoryList.unshift(el.data());
     });
+
     setBookingList(bookingHistoryList);
     setIsLoading(false);
   };
@@ -68,6 +74,21 @@ const BookingScreen = (props) => {
   const renderBooking = ({ item }) => {
     return (
       <View style={{ marginLeft: 10 }}>
+        {isScoreling ? (
+          <View
+            style={[
+              StyleSheet.absoluteFill,
+              {
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 1000,
+                elevation: 1000,
+              },
+            ]}
+          >
+            <ActivityIndicator size="large" color="#ff6f00" />
+          </View>
+        ) : null}
         <Card style={{ padding: 15, margin: 12 }}>
           <Text
             style={{
